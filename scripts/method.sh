@@ -4,6 +4,7 @@
 set -euo pipefail
 
 cd /home/user
+export PYTHONPATH=/home/user:${PYTHONPATH:-}
 
 WORKLOAD="${1:-data/workloads/swebench_scaled.json}"
 OUTDIR="${2:-outputs/method}"

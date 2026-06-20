@@ -4,6 +4,7 @@
 set -euo pipefail
 
 cd /home/user
+export PYTHONPATH=/home/user:${PYTHONPATH:-}
 
 rm -rf outputs
 mkdir -p data/workloads outputs
