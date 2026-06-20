@@ -1,4 +1,4 @@
-action: submit
+action: done
 gpus: 0
 test: false
-notes: "CPU scoring job: run evaluate_train.sh and evaluate_test.sh over saved scheduler artifacts to populate train/test scores."
+notes: "Metric-split train/test scoring over saved scheduler artifacts; 72 train metric values and 96 test metric values across 5 experiments; Continuum train mean-speedups 1.06-1.34x and test p90-speedups 1.02-1.45x; completed_fraction is saturated at 1.0 and retained as a guardrail."
