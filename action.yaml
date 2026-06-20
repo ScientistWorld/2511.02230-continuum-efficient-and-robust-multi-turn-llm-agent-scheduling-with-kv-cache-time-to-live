@@ -1,5 +1,2 @@
-action: submit
-gpus: 0
-test: false
-milestone: core_claim_plus
-notes: "Rerun the actual scaled Continuum method, validate core scores, and regenerate train/test scoring files from fresh artifacts."
+action: done
+notes: "Audited packaging paths; no external artifacts are required and data/downloads gitkeep is now trackable."
