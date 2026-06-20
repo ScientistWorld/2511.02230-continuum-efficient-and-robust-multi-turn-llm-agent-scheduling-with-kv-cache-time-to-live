@@ -44,6 +44,8 @@ Validation later flagged the ablation reference because `reference.json` had use
 
 Final packaging cleanup on 2026-06-20 aligned `MILESTONES.md`, `CHECKLIST.md`, and `action.yaml` to `core_claim_plus`, removed generated job/trajectory artifacts from git tracking, and reran `python validate.py --compare` plus Python bytecode checks successfully.
 
+Continuation audit on 2026-06-20 rechecked the method implementation, artifact-based evaluator, standalone scripts, scoring files, and deliverable docs. The audit confirmed that the workspace supports `core_claim_plus`; follow-up edits made the TTL-expiry constraint explicit in `TARGETS.md` and added source notes to `reference.json` for paper values that come from prose ranges or image-only figures.
+
 ## Deviations from Paper
 
 - Paper used real GPT-5-generated SWE-Bench and BFCL traces with vLLM/LMCache serving Llama-3.1 models on A100/B200/H100 GPUs. This reproduction uses a discrete-event simulator and synthetic traces from the paper's Table 1 statistics because the exact traces and hardware are unavailable in this workspace.

@@ -13,3 +13,8 @@
 - Covered additional BFCL-style, CPU-offload, higher-turn, and ablation settings.
 - Evaluation reports benefit metrics plus constraints including completion fraction, cache-hit rate, peak pinned memory, and expired-pin behavior.
 - The exact vLLM/Llama hardware experiments and unreleased paper traces remain out of scope for this scaled reproduction.
+
+### [2026-06-20 13:34] - core_claim_plus
+- Continued-agent audit verified the implementation is a real scaled Continuum scheduler rather than an input-output surrogate.
+- Reran standalone evaluation, validator comparison, and Python bytecode checks successfully.
+- Tightened scoring documentation for TTL-expiry and source qualification of prose-derived reference targets.

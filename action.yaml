@@ -5,4 +5,4 @@ action: done
 gpus: 0
 test: false
 milestone: core_claim_plus
-notes: "Scaled Continuum reproduction is packaged, validated, and covers SWE-style, BFCL-style, offload, turn-robustness, and ablation settings."
+notes: "Continuation audit restored core_claim_plus after validation; scoring docs now explicitly cover TTL expiry and qualify prose-derived reference targets."

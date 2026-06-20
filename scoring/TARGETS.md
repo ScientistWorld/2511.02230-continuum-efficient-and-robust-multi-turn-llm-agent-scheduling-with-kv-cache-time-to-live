@@ -20,6 +20,11 @@ All scheduler variants should finish every program under bounded cache retention
 Cache retention should not win merely by pinning all memory indefinitely.
 - **Metric:** `peak_pinned_memory_fraction` (lower is better)
 
+## Constraint: expired_pin_fraction
+
+Bounded TTL retention should release stale cache entries when tool calls run longer than expected.
+- **Metric:** `expired_pin_fraction` (lower is generally better, but nonzero values demonstrate active TTL expiry)
+
 ## Robustness: swebench_scaled_offload
 
 Tests whether completion-time reduction remains when cache misses use CPU-style reload rather than full prefill.

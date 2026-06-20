@@ -2,6 +2,7 @@
   "experiments": {
     "swebench_scaled_no_offload": {
       "description": "Scaled SWE-Bench-style agent traces without KV offload; paper reports up to roughly 2x average response-time reduction over vanilla vLLM.",
+      "source_note": "Paper Section 6.2 states up to roughly 2x average response-time reduction for Llama-3.1-8B end-to-end experiments; exact figure values are image-only in the markdown.",
       "weight": 0.3,
       "primary_metric": "delay_reduction_x",
       "metrics": {
@@ -23,6 +24,7 @@
     },
     "bfcl_scaled_no_offload": {
       "description": "Scaled BFCL-v4-style web-search traces without KV offload; paper reports consistent end-to-end gains and up to roughly 2x average response-time reduction.",
+      "source_note": "Paper Section 6.2 reports consistent SWE-Bench/BFCL end-to-end improvements and highlights up to roughly 2x average response-time reduction; exact figure values are image-only in the markdown.",
       "weight": 0.25,
       "primary_metric": "delay_reduction_x",
       "metrics": {
@@ -44,6 +46,7 @@
     },
     "swebench_scaled_offload": {
       "description": "SWE-Bench-style traces with CPU offload enabled; paper reports Continuum improves over offloading baselines including InferCept.",
+      "source_note": "Paper abstract reports the overall lower-bound gains of 1.12x delay reduction and 1.10x throughput improvement; Figure 9 exact offload values are image-only in the markdown.",
       "weight": 0.2,
       "primary_metric": "delay_reduction_x",
       "metrics": {
@@ -66,6 +69,7 @@
     },
     "turn_robustness_scaled": {
       "description": "More-turn SWE-Bench-style traces; paper reports Continuum remains stable while baseline delay grows as turn count increases.",
+      "source_note": "Paper Section 6.3 reports robustness as turn count increases; the 1.12x/1.10x values use the paper's overall lower-bound delay and throughput gains because Figure 13 exact values are image-only in the markdown.",
       "weight": 0.15,
       "primary_metric": "delay_reduction_x",
       "metrics": {
@@ -87,6 +91,7 @@
     },
     "ablation_scaled": {
       "description": "Ablation corresponding to Figure 15; paper reports program-level scheduling, static TTL, and full cost-model TTL improve progressively.",
+      "source_note": "Paper Section 6.4 gives a qualitative ablation ordering in Figure 15; the reference keeps only coarse lower-bound proposed gains and leaves Static TTL without invented paper-side numbers.",
       "weight": 0.1,
       "primary_metric": "delay_reduction_x",
       "metrics": {
