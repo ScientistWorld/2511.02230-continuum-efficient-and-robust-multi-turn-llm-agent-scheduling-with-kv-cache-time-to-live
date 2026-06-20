@@ -2,4 +2,4 @@ action: submit
 gpus: 0
 test: true
 milestone: core_claim
-notes: "CPU test job: run the scaled Continuum reproduction end-to-end and validate scoring/scores.json."
+notes: "Retry CPU test after fixing the clean-container import path; run scripts/run.sh end-to-end and validate scoring/scores.json."
