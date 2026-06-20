@@ -1,9 +1,4 @@
-# This iteration writes files only — do NOT submit compute jobs.
-# Once you set action to 'done', STOP immediately.
-# Do NOT sleep, poll, or wait. The system reads this file
-# only after your turn ends.
-action: done
+action: submit
 gpus: 0
 test: false
-milestone: core_claim_plus
-notes: "Improvements: standalone held-out test discovery, queue/deadlock anti-shortcut metrics, required metric descriptions, design handoff. Notes: no runtime execution; next runner should verify future artifacts preserve the metric schema."
+notes: "CPU scoring job: run evaluate_train.sh and evaluate_test.sh over saved scheduler artifacts to populate train/test scores."
