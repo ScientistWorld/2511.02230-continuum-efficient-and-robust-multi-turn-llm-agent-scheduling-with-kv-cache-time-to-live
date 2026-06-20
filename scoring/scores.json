@@ -3,13 +3,13 @@
     "ablation_scaled": {
       "results": {
         "continuum": {
-          "avg_completion_time_s": 22.562582863051162,
-          "cache_hit_rate": 0.4626364399664148,
+          "avg_completion_time_s": 22.60330406436866,
+          "cache_hit_rate": 0.45675902602854745,
           "completed_fraction": 1.0,
-          "delay_reduction_x": 1.3473017448291285,
-          "expired_pin_fraction": 0.5280612244897959,
-          "p90_completion_time_s": 32.93763099196153,
-          "p90_delay_reduction_x": 1.3706283675508348,
+          "delay_reduction_x": 1.3448745003240612,
+          "expired_pin_fraction": 0.5209790209790209,
+          "p90_completion_time_s": 31.35416664523484,
+          "p90_delay_reduction_x": 1.4398485505391392,
           "peak_pinned_memory_fraction": 0.51614150390625,
           "throughput_improvement_x": 1.0089657534618368,
           "throughput_jobs_per_s": 0.16059886155709283
@@ -43,14 +43,14 @@
     "bfcl_scaled_no_offload": {
       "results": {
         "continuum": {
-          "avg_completion_time_s": 24.52877814115212,
-          "cache_hit_rate": 0.16352201257861634,
+          "avg_completion_time_s": 25.28081572877431,
+          "cache_hit_rate": 0.14465408805031446,
           "completed_fraction": 1.0,
-          "delay_reduction_x": 1.2115350885986134,
-          "expired_pin_fraction": 0.3944954128440367,
-          "p90_completion_time_s": 36.41292558543989,
-          "p90_delay_reduction_x": 1.3425271463305304,
-          "peak_pinned_memory_fraction": 0.787506103515625,
+          "delay_reduction_x": 1.1754951152399882,
+          "expired_pin_fraction": 0.40825688073394495,
+          "p90_completion_time_s": 40.34954563605197,
+          "p90_delay_reduction_x": 1.2115462591997057,
+          "peak_pinned_memory_fraction": 0.63591474609375,
           "throughput_improvement_x": 1.0,
           "throughput_jobs_per_s": 0.1316434630489725
         },
@@ -71,13 +71,13 @@
     "swebench_scaled_no_offload": {
       "results": {
         "continuum": {
-          "avg_completion_time_s": 22.562582863051162,
-          "cache_hit_rate": 0.4626364399664148,
+          "avg_completion_time_s": 22.60330406436866,
+          "cache_hit_rate": 0.45675902602854745,
           "completed_fraction": 1.0,
-          "delay_reduction_x": 1.346973988267646,
-          "expired_pin_fraction": 0.5280612244897959,
-          "p90_completion_time_s": 32.93763099196153,
-          "p90_delay_reduction_x": 1.3779712867131912,
+          "delay_reduction_x": 1.3445473342355858,
+          "expired_pin_fraction": 0.5209790209790209,
+          "p90_completion_time_s": 31.35416664523484,
+          "p90_delay_reduction_x": 1.4475623056042974,
           "peak_pinned_memory_fraction": 0.51614150390625,
           "throughput_improvement_x": 1.0089657534618368,
           "throughput_jobs_per_s": 0.16059886155709283
@@ -99,11 +99,11 @@
     "swebench_scaled_offload": {
       "results": {
         "continuum": {
-          "avg_completion_time_s": 21.01809564295596,
-          "cache_hit_rate": 0.15113350125944586,
+          "avg_completion_time_s": 21.036387349244308,
+          "cache_hit_rate": 0.14273719563392107,
           "completed_fraction": 1.0,
-          "delay_reduction_x": 1.0561878075518163,
-          "expired_pin_fraction": 0.5197255574614065,
+          "delay_reduction_x": 1.055269423760896,
+          "expired_pin_fraction": 0.5019047619047619,
           "p90_completion_time_s": 31.829269647432852,
           "p90_delay_reduction_x": 1.0193946305351362,
           "peak_pinned_memory_fraction": 0.9210546874999999,
@@ -139,16 +139,16 @@
     "turn_robustness_scaled": {
       "results": {
         "continuum": {
-          "avg_completion_time_s": 87.70756438972225,
-          "cache_hit_rate": 0.019367157665030006,
+          "avg_completion_time_s": 86.6851931017933,
+          "cache_hit_rate": 0.01800327332242226,
           "completed_fraction": 1.0,
-          "delay_reduction_x": 1.1412726222908636,
-          "expired_pin_fraction": 0.10434782608695652,
-          "p90_completion_time_s": 127.25012153113147,
-          "p90_delay_reduction_x": 1.1950351826408885,
-          "peak_pinned_memory_fraction": 0.6895304687499998,
-          "throughput_improvement_x": 1.0061726818838697,
-          "throughput_jobs_per_s": 0.20715473215355704
+          "delay_reduction_x": 1.1547328721787469,
+          "expired_pin_fraction": 0.09696048632218845,
+          "p90_completion_time_s": 126.70303170523445,
+          "p90_delay_reduction_x": 1.200195213787837,
+          "peak_pinned_memory_fraction": 0.6325925781249999,
+          "throughput_improvement_x": 0.9852136681873424,
+          "throughput_jobs_per_s": 0.20283960916653881
         },
         "vllm": {
           "avg_completion_time_s": 100.09824200580307,

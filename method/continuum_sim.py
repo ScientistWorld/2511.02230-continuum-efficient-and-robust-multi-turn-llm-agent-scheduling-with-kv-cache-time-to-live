@@ -1,8 +1,8 @@
 """Discrete-event reproduction of Continuum's KV-cache TTL scheduler.
 
 This implements the paper's computational steps: tool-call history tracking,
-Equation (2)'s empirical-CDF TTL search, pin/unpin with expiration, deadlock
-prevention, and TTL-aware program-level FCFS priority.
+the simplified Equation (2) empirical-CDF TTL search, pin/unpin with expiration,
+deadlock prevention, and TTL-aware program-level FCFS priority.
 """
 
 from __future__ import annotations
@@ -46,7 +46,7 @@ class ContinuumSimulator:
         policy: str,
         capacity: float = 8.0,
         offload: bool = False,
-        cold_start_k: int = 10,
+        cold_start_k: int = 100,
     ) -> None:
         self.programs = {p.program_id: p for p in programs}
         self.policy = policy
@@ -66,6 +66,7 @@ class ContinuumSimulator:
         self.pending_tool_start: dict[str, tuple[str, float]] = {}
         self.completed: dict[str, float] = {}
         self.program_start = {p.program_id: p.arrival_s for p in programs}
+        self.attained_service: dict[str, float] = defaultdict(float)
         self.metrics = {
             "requests": 0,
             "cache_hits": 0,
@@ -219,7 +220,7 @@ class ContinuumSimulator:
         if self.policy in {"continuum", "static_ttl"}:
             return (0 if pinned else 1, request.program_arrival_s, request.arrival_s)
         if self.policy == "plas":
-            return (request.turn.turn_index, request.arrival_s)
+            return (self.attained_service[request.program_id], request.arrival_s)
         return (request.arrival_s,)
 
     def _schedule(self) -> None:
@@ -252,6 +253,7 @@ class ContinuumSimulator:
                     self.metrics["cache_misses"] += 1
                     self.wait_history.append(wait)
                 service = request.turn.decode_s + self._miss_cost(request)
+            self.attained_service[request.program_id] += service
             self._push(self.time + service, "finish", request)
 
 

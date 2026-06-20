@@ -30,7 +30,15 @@ The first packaged CPU test job failed before running the method because the cle
 
 The retry packaged CPU job succeeded and validated the reusable scripts, method outputs, independent evaluation, and scoring schema.
 
-On 2026-06-20, a fresh local `python validate.py --compare` check also passed. Because the same scaled method is scored on the core SWE-style workload plus BFCL-style, CPU-offload, higher-turn, and ablation settings, the current milestone is `core_claim_plus`.
+On 2026-06-20, a continuation audit fixed two implementation fidelity issues: Continuum now uses the paper's `K = 100` cold-start threshold, and the PLAS comparison uses cumulative attained service instead of turn index. A rerun of `bash scripts/reproduce.sh`, `bash scripts/evaluate.sh outputs`, and `python validate.py --compare` passed. With the stricter settings, the current milestone remains `core_claim_plus`.
+
+Updated reproduced scores after this audit:
+
+- SWE-style no offload: Continuum `delay_reduction_x` 1.345 over vLLM.
+- BFCL-style no offload: Continuum `delay_reduction_x` 1.175 over vLLM.
+- SWE-style CPU offload: Continuum `delay_reduction_x` 1.055 over vLLM and better than InferCept's 1.005.
+- More-turn stress: Continuum `delay_reduction_x` 1.155.
+- Ablation: Continuum improves over program-level attained-service scheduling and simple fixed TTL.
 
 Validation later flagged the ablation reference because `reference.json` had used `1.0` as a placeholder for Static TTL's primary metric even though the paper text only states that Figure 15 shows gradual improvement and does not report an exact numeric value. The reference now keeps Static TTL as an ablation baseline but omits an invented paper-side primary metric; the reproduced Static TTL score remains in `scores.json`.
 

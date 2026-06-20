@@ -5,4 +5,4 @@ action: done
 gpus: 0
 test: false
 milestone: core_claim_plus
-notes: "Validated scaled Continuum reproduction with method/eval separation and scores across core plus additional settings."
+notes: "Fixed audit issues (K=100 cold start, PLAS attained-service priority), reran reproduce/evaluate/validate, and restored core_claim_plus for the scaled Continuum reproduction."
