@@ -146,7 +146,7 @@
           "expired_pin_fraction": 0.10434782608695652,
           "p90_completion_time_s": 127.25012153113147,
           "p90_delay_reduction_x": 1.1950351826408885,
-          "peak_pinned_memory_fraction": 0.68953046875,
+          "peak_pinned_memory_fraction": 0.6895304687499998,
           "throughput_improvement_x": 1.0061726818838697,
           "throughput_jobs_per_s": 0.20715473215355704
         },
