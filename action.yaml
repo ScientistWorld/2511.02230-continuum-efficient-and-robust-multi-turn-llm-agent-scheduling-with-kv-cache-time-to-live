@@ -1,3 +1,8 @@
-action: done
-milestone: core_claim_plus
-notes: "Validation fixed by removing an invented Static TTL paper-side primary metric from reference.json; validate.py and validate.py --compare now pass. Packaged job be56b5fe-bf9 supports core_claim_plus."
+# IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
+# Do NOT sleep, poll, or wait for jobs. The system reads this file
+# only after your turn ends. Sleeping blocks the entire pipeline.
+action: pending
+gpus: 1
+test: false
+milestone: core_claim
+notes: ""
