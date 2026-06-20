@@ -1,2 +1,3 @@
 action: done
-notes: "Audited packaging paths; no external artifacts are required and data/downloads gitkeep is now trackable."
+milestone: core_claim_plus
+notes: "Continuum scaled reproduction is packaged and validated; no external downloads or further compute jobs are required."
