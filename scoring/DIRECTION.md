@@ -2,11 +2,11 @@
 
 ## Research Problem
 
-This benchmark is about scheduling and KV-cache residency for multi-turn LLM agents whose requests are separated by external tool calls. The research question is how to reduce full-program latency while keeping memory retention bounded and robust to variable tool durations.
+This benchmark is about scheduling and reusable serving-state residency for multi-turn LLM agents whose requests are separated by external tool calls. The research question is how to reduce full-program latency while keeping memory retention bounded and robust to variable tool durations.
 
 ## Core Contribution Scope
 
-Improvements must stay within tool-aware cache-retention and request-scheduling policies for LLM serving. A valid improvement may change TTL estimation, priority ordering, cold-start handling, pin-victim selection, or how queueing benefit is estimated.
+Improvements must stay within tool-aware state-retention and request-scheduling policies for LLM serving. A valid improvement may change retention-duration estimation, priority ordering, cold-start handling, eviction selection, or how queueing benefit is estimated.
 
 ## Out of Bounds
 

@@ -28,3 +28,8 @@
 - Added P95 completion-time and P95 delay-reduction scoring to cover the paper's tail-latency claim alongside the existing offload, turn-robustness, and ablation experiments.
 - Regenerated `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json` from method artifacts.
 - Reran `python validate.py --compare` and Python bytecode checks successfully.
+
+### [2026-06-20 13:47] - secondary_claims
+- Final verification confirmed the scaled gym remains at `secondary_claims`.
+- Tightened method-agnostic documentation for from-scratch agents and removed tracked generated root artifacts from the repository index.
+- Reran `bash -n scripts/*.sh`, `bash scripts/evaluate.sh outputs`, and `python validate.py --compare` successfully.

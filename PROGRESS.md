@@ -48,6 +48,8 @@ Continuation audit on 2026-06-20 rechecked the method implementation, artifact-b
 
 On 2026-06-20, the evaluation was extended to include the paper's P95 tail-latency claim. `method/continuum_sim.py` now writes `p95_completion_time_s`, the artifact-only evaluators compute `p95_delay_reduction_x`, and `scoring/reference.json` plus `TARGETS.md` document the new target. A full local rerun of `scripts/reproduce.sh`, train/test scoring, `python validate.py --compare`, and bytecode checks passed. Current reproduced P95 speedups for Continuum are 1.371x on SWE-style no offload, 1.167x on BFCL-style no offload, 1.150x on SWE-style offload, and 1.154x on the more-turn stress setting. This supports the `secondary_claims` milestone for the scaled benchmark.
 
+Final verification on 2026-06-20 kept the workspace at `secondary_claims`. The review tightened method-agnostic wording in the problem-facing scoring docs, removed tracked generated root artifacts from the Git index, verified that `scripts/download.sh` is self-contained with no external downloads, and reran `bash -n scripts/*.sh`, `bash scripts/evaluate.sh outputs`, and `python validate.py --compare` successfully.
+
 ## Deviations from Paper
 
 - Paper used real GPT-5-generated SWE-Bench and BFCL traces with vLLM/LMCache serving Llama-3.1 models on A100/B200/H100 GPUs. This reproduction uses a discrete-event simulator and synthetic traces from the paper's Table 1 statistics because the exact traces and hardware are unavailable in this workspace.

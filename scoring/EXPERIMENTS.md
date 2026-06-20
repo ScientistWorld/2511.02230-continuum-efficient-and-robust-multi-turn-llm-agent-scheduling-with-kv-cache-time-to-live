@@ -2,7 +2,7 @@
 
 ## swebench_scaled_no_offload
 
-Tests the central completion-time claim on a coding-agent-style workload with many short inference/tool alternations and no cache offload. The purpose is to check whether useful cache continuity improves whole-program latency.
+Tests the central completion-time claim on a coding-agent-style workload with many short inference/tool alternations and no host-memory fallback. The purpose is to check whether preserving useful cross-turn serving state improves whole-program latency.
 The same artifacts also expose P90 and P95 completion-time ratios so improvements must hold beyond the mean.
 
 ## bfcl_scaled_no_offload
@@ -11,7 +11,7 @@ Tests the same central claim on a function-calling and web-search-style workload
 
 ## swebench_scaled_offload
 
-Tests whether the scheduling benefit remains when missed cache can be reloaded from host memory instead of recomputed from scratch. This isolates the queueing and ordering side of the problem.
+Tests whether the scheduling benefit remains when missed reusable state can be reloaded from host memory instead of recomputed from scratch. This isolates the queueing and ordering side of the problem.
 
 ## turn_robustness_scaled
 
