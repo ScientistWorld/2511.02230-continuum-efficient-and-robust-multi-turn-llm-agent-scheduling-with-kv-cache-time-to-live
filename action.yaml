@@ -1,3 +1,3 @@
 action: done
 milestone: core_claim_plus
-notes: "Packaged CPU reproduction job be56b5fe-bf9 passed end-to-end validation; core claim reproduced on scaled SWE-style traces plus BFCL, offload, robustness, and ablation settings."
+notes: "Validation fixed by removing an invented Static TTL paper-side primary metric from reference.json; validate.py and validate.py --compare now pass. Packaged job be56b5fe-bf9 supports core_claim_plus."

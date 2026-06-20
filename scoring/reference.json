@@ -103,7 +103,7 @@
       },
       "results": {
         "plas": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "completed_fraction": 1.0},
-        "static_ttl": {"type": "proposed", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "completed_fraction": 1.0},
+        "static_ttl": {"type": "baseline"},
         "continuum": {"type": "proposed", "delay_reduction_x": 1.1, "throughput_improvement_x": 1.1, "completed_fraction": 1.0}
       }
     }
