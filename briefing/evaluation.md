@@ -2,7 +2,7 @@
 
 ## Metrics
 
-The benchmark measures end-to-end program completion time, P90 completion time, job throughput, cache-hit rate, peak pinned-memory fraction, expired-pin fraction, and completed-program fraction. Lower completion time and memory pressure are better; higher throughput, cache-hit rate, and completed fraction are better.
+The benchmark measures end-to-end program completion time, P90/P95 completion time, job throughput, cache-hit rate, peak pinned-memory fraction, expired-pin fraction, and completed-program fraction. Lower completion time and memory pressure are better; higher throughput, cache-hit rate, and completed fraction are better.
 
 The reported comparison metric is `delay_reduction_x`, computed as the baseline average completion time divided by the method average completion time for the same workload. Values above 1 mean the method is faster than the baseline.
 

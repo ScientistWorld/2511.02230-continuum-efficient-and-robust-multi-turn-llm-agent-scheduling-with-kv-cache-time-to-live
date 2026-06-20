@@ -23,6 +23,7 @@ EXPERIMENTS = {
 
 TEST_METRICS = [
     "p90_completion_time_s",
+    "p95_completion_time_s",
     "avg_queue_wait_s",
     "cache_hit_rate",
     "peak_pinned_memory_fraction",
@@ -66,11 +67,13 @@ def score_experiment(
     artifacts = {name: load_json(path) for name, path in paths.items()}
     baseline = artifacts[baseline_name]
     baseline_p90 = baseline["p90_completion_time_s"]
+    baseline_p95 = baseline["p95_completion_time_s"]
 
     results = {}
     for method_name, artifact in sorted(artifacts.items()):
         values = {metric: artifact[metric] for metric in TEST_METRICS if metric in artifact}
         values["p90_delay_reduction_x"] = baseline_p90 / artifact["p90_completion_time_s"]
+        values["p95_delay_reduction_x"] = baseline_p95 / artifact["p95_completion_time_s"]
         results[method_name] = values
     return {"slice": "test", "results": results}
 

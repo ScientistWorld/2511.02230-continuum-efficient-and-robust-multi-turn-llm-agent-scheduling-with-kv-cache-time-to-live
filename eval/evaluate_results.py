@@ -34,6 +34,7 @@ EXPERIMENTS = {
 METRICS = [
     "avg_completion_time_s",
     "p90_completion_time_s",
+    "p95_completion_time_s",
     "avg_queue_wait_s",
     "throughput_jobs_per_s",
     "cache_hit_rate",
@@ -84,6 +85,7 @@ def main() -> None:
             values = {metric: artifact[metric] for metric in METRICS if metric in artifact}
             values["delay_reduction_x"] = baseline["avg_completion_time_s"] / artifact["avg_completion_time_s"]
             values["p90_delay_reduction_x"] = baseline["p90_completion_time_s"] / artifact["p90_completion_time_s"]
+            values["p95_delay_reduction_x"] = baseline["p95_completion_time_s"] / artifact["p95_completion_time_s"]
             values["throughput_improvement_x"] = artifact["throughput_jobs_per_s"] / baseline["throughput_jobs_per_s"]
             exp_results[policy] = values
         scores["experiments"][exp_name] = {"results": exp_results}

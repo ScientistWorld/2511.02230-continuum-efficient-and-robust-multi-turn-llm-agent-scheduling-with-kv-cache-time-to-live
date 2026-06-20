@@ -107,6 +107,7 @@ class ContinuumSimulator:
         makespan = max(self.completed.values()) - min(self.program_start.values())
         avg_completion = mean(completion_times)
         p90 = sorted(completion_times)[int(0.9 * (len(completion_times) - 1))]
+        p95 = sorted(completion_times)[int(0.95 * (len(completion_times) - 1))]
         return {
             "policy": self.policy,
             "offload": self.offload,
@@ -114,6 +115,7 @@ class ContinuumSimulator:
             "completed_fraction": len(self.completed) / max(1, len(self.programs)),
             "avg_completion_time_s": avg_completion,
             "p90_completion_time_s": p90,
+            "p95_completion_time_s": p95,
             "throughput_jobs_per_s": len(self.completed) / makespan,
             "cache_hit_rate": self.metrics["cache_hits"] / max(1, self.metrics["cache_hits"] + self.metrics["cache_misses"]),
             "avg_queue_wait_s": self.metrics["queue_wait_s"] / max(1, self.metrics["requests"]),

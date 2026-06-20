@@ -25,6 +25,11 @@ Cache retention should not win merely by pinning all memory indefinitely.
 Bounded TTL retention should release stale cache entries when tool calls run longer than expected.
 - **Metric:** `expired_pin_fraction` (lower is generally better, but nonzero values demonstrate active TTL expiry)
 
+## Tail Latency: p95_delay_reduction_x
+
+The paper reports P90 and P95 latency improvements on SWE-Bench traces; the benchmark should reward methods that reduce high-percentile completion time, not only the mean.
+- **Metric:** `p95_delay_reduction_x` (higher is better)
+
 ## Robustness: swebench_scaled_offload
 
 Tests whether completion-time reduction remains when cache misses use CPU-style reload rather than full prefill.

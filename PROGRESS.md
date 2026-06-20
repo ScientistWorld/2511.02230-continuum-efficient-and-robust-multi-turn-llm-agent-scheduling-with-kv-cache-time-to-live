@@ -46,6 +46,8 @@ Final packaging cleanup on 2026-06-20 aligned `MILESTONES.md`, `CHECKLIST.md`, a
 
 Continuation audit on 2026-06-20 rechecked the method implementation, artifact-based evaluator, standalone scripts, scoring files, and deliverable docs. The audit confirmed that the workspace supports `core_claim_plus`; follow-up edits made the TTL-expiry constraint explicit in `TARGETS.md` and added source notes to `reference.json` for paper values that come from prose ranges or image-only figures.
 
+On 2026-06-20, the evaluation was extended to include the paper's P95 tail-latency claim. `method/continuum_sim.py` now writes `p95_completion_time_s`, the artifact-only evaluators compute `p95_delay_reduction_x`, and `scoring/reference.json` plus `TARGETS.md` document the new target. A full local rerun of `scripts/reproduce.sh`, train/test scoring, `python validate.py --compare`, and bytecode checks passed. Current reproduced P95 speedups for Continuum are 1.371x on SWE-style no offload, 1.167x on BFCL-style no offload, 1.150x on SWE-style offload, and 1.154x on the more-turn stress setting. This supports the `secondary_claims` milestone for the scaled benchmark.
+
 ## Deviations from Paper
 
 - Paper used real GPT-5-generated SWE-Bench and BFCL traces with vLLM/LMCache serving Llama-3.1 models on A100/B200/H100 GPUs. This reproduction uses a discrete-event simulator and synthetic traces from the paper's Table 1 statistics because the exact traces and hardware are unavailable in this workspace.

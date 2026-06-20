@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: core_claim_plus**
+**Current: secondary_claims**
 
 ## Progress Log
 
@@ -23,3 +23,8 @@
 - Final verification confirmed the claimed milestone remains justified.
 - Fixed `scripts/evaluate.sh`'s evaluator path to score all method artifacts in each experiment rather than a fixed policy list.
 - Regenerated `scoring/scores.json` with the missing queue-wait and deadlock-unpin constraint metrics and reran validation successfully.
+
+### [2026-06-20 13:43] - secondary_claims
+- Added P95 completion-time and P95 delay-reduction scoring to cover the paper's tail-latency claim alongside the existing offload, turn-robustness, and ablation experiments.
+- Regenerated `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json` from method artifacts.
+- Reran `python validate.py --compare` and Python bytecode checks successfully.
