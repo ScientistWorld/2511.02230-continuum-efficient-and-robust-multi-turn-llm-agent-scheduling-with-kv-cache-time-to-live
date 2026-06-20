@@ -42,6 +42,8 @@ Updated reproduced scores after this audit:
 
 Validation later flagged the ablation reference because `reference.json` had used `1.0` as a placeholder for Static TTL's primary metric even though the paper text only states that Figure 15 shows gradual improvement and does not report an exact numeric value. The reference now keeps Static TTL as an ablation baseline but omits an invented paper-side primary metric; the reproduced Static TTL score remains in `scores.json`.
 
+Final packaging cleanup on 2026-06-20 aligned `MILESTONES.md`, `CHECKLIST.md`, and `action.yaml` to `core_claim_plus`, removed generated job/trajectory artifacts from git tracking, and reran `python validate.py --compare` plus Python bytecode checks successfully.
+
 ## Deviations from Paper
 
 - Paper used real GPT-5-generated SWE-Bench and BFCL traces with vLLM/LMCache serving Llama-3.1 models on A100/B200/H100 GPUs. This reproduction uses a discrete-event simulator and synthetic traces from the paper's Table 1 statistics because the exact traces and hardware are unavailable in this workspace.
