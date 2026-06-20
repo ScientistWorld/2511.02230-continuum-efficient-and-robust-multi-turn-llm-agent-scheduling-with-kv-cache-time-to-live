@@ -4,8 +4,10 @@
       "results": {
         "continuum": {
           "avg_completion_time_s": 22.60330406436866,
+          "avg_queue_wait_s": 0.0007451242075485896,
           "cache_hit_rate": 0.45675902602854745,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 4,
           "delay_reduction_x": 1.3448745003240612,
           "expired_pin_fraction": 0.5209790209790209,
           "p90_completion_time_s": 31.35416664523484,
@@ -16,8 +18,10 @@
         },
         "plas": {
           "avg_completion_time_s": 30.398607259240624,
+          "avg_queue_wait_s": 0.024547072968414418,
           "cache_hit_rate": 0.0,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
           "delay_reduction_x": 1.0,
           "expired_pin_fraction": 0.0,
           "p90_completion_time_s": 45.14525139750401,
@@ -28,8 +32,10 @@
         },
         "static_ttl": {
           "avg_completion_time_s": 23.133506132816347,
+          "avg_queue_wait_s": 0.0007628504810666178,
           "cache_hit_rate": 0.5172124265323258,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 9,
           "delay_reduction_x": 1.3140510169411057,
           "expired_pin_fraction": 0.47523089840470195,
           "p90_completion_time_s": 36.26469038268249,
@@ -44,8 +50,10 @@
       "results": {
         "continuum": {
           "avg_completion_time_s": 25.28081572877431,
+          "avg_queue_wait_s": 0.13232239469030357,
           "cache_hit_rate": 0.14465408805031446,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 37,
           "delay_reduction_x": 1.1754951152399882,
           "expired_pin_fraction": 0.40825688073394495,
           "p90_completion_time_s": 40.34954563605197,
@@ -56,8 +64,10 @@
         },
         "vllm": {
           "avg_completion_time_s": 29.717475398456465,
+          "avg_queue_wait_s": 0.19399482447990474,
           "cache_hit_rate": 0.0,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
           "delay_reduction_x": 1.0,
           "expired_pin_fraction": 0.0,
           "p90_completion_time_s": 48.885341075766576,
@@ -72,8 +82,10 @@
       "results": {
         "continuum": {
           "avg_completion_time_s": 22.60330406436866,
+          "avg_queue_wait_s": 0.0007451242075485896,
           "cache_hit_rate": 0.45675902602854745,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 4,
           "delay_reduction_x": 1.3445473342355858,
           "expired_pin_fraction": 0.5209790209790209,
           "p90_completion_time_s": 31.35416664523484,
@@ -84,8 +96,10 @@
         },
         "vllm": {
           "avg_completion_time_s": 30.391212224663267,
+          "avg_queue_wait_s": 0.023870181931585507,
           "cache_hit_rate": 0.0,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
           "delay_reduction_x": 1.0,
           "expired_pin_fraction": 0.0,
           "p90_completion_time_s": 45.38710975927751,
@@ -100,8 +114,10 @@
       "results": {
         "continuum": {
           "avg_completion_time_s": 21.036387349244308,
+          "avg_queue_wait_s": 0.19201107787369326,
           "cache_hit_rate": 0.14273719563392107,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 353,
           "delay_reduction_x": 1.055269423760896,
           "expired_pin_fraction": 0.5019047619047619,
           "p90_completion_time_s": 31.829269647432852,
@@ -112,8 +128,10 @@
         },
         "infercept": {
           "avg_completion_time_s": 22.09708132191637,
+          "avg_queue_wait_s": 0.24980273822506396,
           "cache_hit_rate": 0.010075566750629723,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 22,
           "delay_reduction_x": 1.0046148644088362,
           "expired_pin_fraction": 0.22727272727272727,
           "p90_completion_time_s": 32.44658657244804,
@@ -124,8 +142,10 @@
         },
         "vllm": {
           "avg_completion_time_s": 22.19905635604804,
+          "avg_queue_wait_s": 0.25495281915244794,
           "cache_hit_rate": 0.0,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
           "delay_reduction_x": 1.0,
           "expired_pin_fraction": 0.0,
           "p90_completion_time_s": 32.44658657244804,
@@ -140,8 +160,10 @@
       "results": {
         "continuum": {
           "avg_completion_time_s": 86.6851931017933,
+          "avg_queue_wait_s": 1.0723830286442761,
           "cache_hit_rate": 0.01800327332242226,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 2905,
           "delay_reduction_x": 1.1547328721787469,
           "expired_pin_fraction": 0.09696048632218845,
           "p90_completion_time_s": 126.70303170523445,
@@ -152,8 +174,10 @@
         },
         "vllm": {
           "avg_completion_time_s": 100.09824200580307,
+          "avg_queue_wait_s": 1.4942332490566297,
           "cache_hit_rate": 0.0,
           "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
           "delay_reduction_x": 1.0,
           "expired_pin_fraction": 0.0,
           "p90_completion_time_s": 152.06837222503094,

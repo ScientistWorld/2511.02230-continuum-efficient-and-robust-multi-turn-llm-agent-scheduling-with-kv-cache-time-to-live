@@ -9,23 +9,23 @@ from pathlib import Path
 
 EXPERIMENTS = {
     "swebench_scaled_no_offload": {
-        "policies": ["vllm", "continuum"],
+        "baseline": "vllm",
         "primary_metric": "avg_completion_time_s",
     },
     "bfcl_scaled_no_offload": {
-        "policies": ["vllm", "continuum"],
+        "baseline": "vllm",
         "primary_metric": "avg_completion_time_s",
     },
     "swebench_scaled_offload": {
-        "policies": ["vllm", "infercept", "continuum"],
+        "baseline": "vllm",
         "primary_metric": "avg_completion_time_s",
     },
     "turn_robustness_scaled": {
-        "policies": ["vllm", "continuum"],
+        "baseline": "vllm",
         "primary_metric": "avg_completion_time_s",
     },
     "ablation_scaled": {
-        "policies": ["plas", "static_ttl", "continuum"],
+        "baseline": "plas",
         "primary_metric": "avg_completion_time_s",
     },
 }
@@ -34,11 +34,13 @@ EXPERIMENTS = {
 METRICS = [
     "avg_completion_time_s",
     "p90_completion_time_s",
+    "avg_queue_wait_s",
     "throughput_jobs_per_s",
     "cache_hit_rate",
     "completed_fraction",
     "peak_pinned_memory_fraction",
     "expired_pin_fraction",
+    "deadlock_unpins",
 ]
 
 
@@ -48,6 +50,20 @@ def load_json(path: Path) -> dict:
     return json.loads(path.read_text())
 
 
+def discover_artifacts(artifacts_dir: Path, experiment: str) -> dict[str, Path]:
+    exp_dir = artifacts_dir / experiment
+    if not exp_dir.is_dir():
+        raise FileNotFoundError(f"missing experiment artifact directory: {exp_dir}")
+    paths = {
+        path.stem: path
+        for path in sorted(exp_dir.glob("*.json"))
+        if path.is_file()
+    }
+    if not paths:
+        raise FileNotFoundError(f"no JSON artifacts found in {exp_dir}")
+    return paths
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--artifacts", type=Path, default=Path("outputs"))
@@ -55,13 +71,16 @@ def main() -> None:
     args = parser.parse_args()
     scores = {"experiments": {}}
     for exp_name, spec in EXPERIMENTS.items():
-        artifacts = {
-            policy: load_json(args.artifacts / exp_name / f"{policy}.json")
-            for policy in spec["policies"]
-        }
-        baseline = artifacts["vllm"] if "vllm" in artifacts else artifacts[spec["policies"][0]]
+        paths = discover_artifacts(args.artifacts, exp_name)
+        baseline_name = spec["baseline"]
+        if baseline_name not in paths:
+            raise FileNotFoundError(
+                f"{exp_name} needs baseline artifact {baseline_name}.json for ratios"
+            )
+        artifacts = {name: load_json(path) for name, path in paths.items()}
+        baseline = artifacts[baseline_name]
         exp_results = {}
-        for policy, artifact in artifacts.items():
+        for policy, artifact in sorted(artifacts.items()):
             values = {metric: artifact[metric] for metric in METRICS if metric in artifact}
             values["delay_reduction_x"] = baseline["avg_completion_time_s"] / artifact["avg_completion_time_s"]
             values["p90_delay_reduction_x"] = baseline["p90_completion_time_s"] / artifact["p90_completion_time_s"]

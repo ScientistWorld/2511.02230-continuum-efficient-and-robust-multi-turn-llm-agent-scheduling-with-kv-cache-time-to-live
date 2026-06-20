@@ -18,3 +18,8 @@
 - Continued-agent audit verified the implementation is a real scaled Continuum scheduler rather than an input-output surrogate.
 - Reran standalone evaluation, validator comparison, and Python bytecode checks successfully.
 - Tightened scoring documentation for TTL-expiry and source qualification of prose-derived reference targets.
+
+### [2026-06-20 14:00] - core_claim_plus
+- Final verification confirmed the claimed milestone remains justified.
+- Fixed `scripts/evaluate.sh`'s evaluator path to score all method artifacts in each experiment rather than a fixed policy list.
+- Regenerated `scoring/scores.json` with the missing queue-wait and deadlock-unpin constraint metrics and reran validation successfully.
