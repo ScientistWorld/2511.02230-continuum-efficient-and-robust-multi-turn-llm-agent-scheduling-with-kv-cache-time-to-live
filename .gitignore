@@ -234,3 +234,6 @@ core.[0-9]*
 
 # Local git wrapper artifacts
 .git-shims/
+
+# Auto-added by swarm
+data/downloads/
