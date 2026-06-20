@@ -8,7 +8,7 @@ Implemented a scaled reproduction of Continuum as a deterministic discrete-event
 
 ## Results
 
-Local CPU run before submission produced:
+The packaged CPU test job `be56b5fe-bf9` completed successfully in the Apptainer environment and `validate.py --compare` passed. The reproduced scores are:
 
 - SWE-style no offload: Continuum `delay_reduction_x` 1.347 over vLLM.
 - BFCL-style no offload: Continuum `delay_reduction_x` 1.212 over vLLM.
@@ -16,7 +16,7 @@ Local CPU run before submission produced:
 - More-turn stress: Continuum `delay_reduction_x` 1.141.
 - Ablation: Continuum improves over program-level scheduling and simple fixed TTL.
 
-All experiments completed every program (`completed_fraction` 1.0).
+All experiments completed every program (`completed_fraction` 1.0). The scored experiments also report cache-hit behavior, peak pinned memory fraction, and expired pin fraction so future methods cannot improve latency merely by retaining all KV cache indefinitely.
 
 ## Remaining
 
@@ -27,6 +27,8 @@ The exact paper traces, vLLM fork integration, and Llama-3.1 hardware measuremen
 The workspace initially had only scaffold files. The paper's exact traces are not bundled here, and the public repository is a vLLM fork that is too heavy for a quick CPU-only reproduction. The implemented benchmark uses deterministic synthetic traces parameterized by the paper's published workload statistics.
 
 The first packaged CPU test job failed before running the method because the clean Apptainer environment did not put `/home/user` on Python's module search path. The reproduction scripts now export `PYTHONPATH=/home/user:${PYTHONPATH:-}`, and `data/__init__.py` makes the shared workload module an explicit package.
+
+The retry packaged CPU job succeeded and validated the reusable scripts, method outputs, independent evaluation, and scoring schema.
 
 ## Deviations from Paper
 

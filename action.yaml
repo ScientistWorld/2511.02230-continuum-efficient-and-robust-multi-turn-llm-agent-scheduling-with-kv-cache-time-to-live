@@ -1,5 +1,3 @@
-action: submit
-gpus: 0
-test: true
-milestone: core_claim
-notes: "Retry CPU test after fixing the clean-container import path; run scripts/run.sh end-to-end and validate scoring/scores.json."
+action: done
+milestone: core_claim_plus
+notes: "Packaged CPU reproduction job be56b5fe-bf9 passed end-to-end validation; core claim reproduced on scaled SWE-style traces plus BFCL, offload, robustness, and ablation settings."

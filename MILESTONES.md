@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: core_claim**
+**Current: core_claim_plus**
 
 ## Progress Log
 
@@ -20,6 +20,11 @@
 - First packaged CPU job failed before method execution due to missing workspace import path in the clean Apptainer environment.
 - Added explicit package initialization and `PYTHONPATH=/home/user` exports to the runnable scripts, then verified `scripts/run.sh` in a clean local shell.
 
+### [2026-06-20 13:20] - core_claim_plus
+- Packaged CPU test job `be56b5fe-bf9` completed successfully and `validate.py --compare` passed in the container.
+- Reproduced the core latency-reduction claim on SWE-style traces and extended it to BFCL-style, CPU-offload, more-turn robustness, and ablation settings.
+- All scored experiments completed every program and include cache-retention constraints.
+
 ## Stop Justification
 
-Not stopped. Submitting a CPU job to validate the packaged reproduction in the compute environment.
+Stopped at `core_claim_plus`. The reusable environment is validated end-to-end; moving higher would require real vLLM/Llama hardware traces or the full upstream serving stack, which is beyond the scope of this scaled CPU reproduction.
