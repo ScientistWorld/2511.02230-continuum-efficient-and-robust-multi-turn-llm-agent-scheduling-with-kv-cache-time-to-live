@@ -16,6 +16,10 @@
 - Local CPU reproduction showed Continuum improves average completion time on SWE-style and BFCL-style multi-turn workloads while completing all programs.
 - Added offload, turn-stress, and ablation experiments to make the benchmark useful for future agents.
 
+### [2026-06-20 13:08] - core_claim
+- First packaged CPU job failed before method execution due to missing workspace import path in the clean Apptainer environment.
+- Added explicit package initialization and `PYTHONPATH=/home/user` exports to the runnable scripts, then verified `scripts/run.sh` in a clean local shell.
+
 ## Stop Justification
 
 Not stopped. Submitting a CPU job to validate the packaged reproduction in the compute environment.
