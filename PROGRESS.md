@@ -30,6 +30,8 @@ The first packaged CPU test job failed before running the method because the cle
 
 The retry packaged CPU job succeeded and validated the reusable scripts, method outputs, independent evaluation, and scoring schema.
 
+On 2026-06-20, a fresh local `python validate.py --compare` check also passed. Because the same scaled method is scored on the core SWE-style workload plus BFCL-style, CPU-offload, higher-turn, and ablation settings, the current milestone is `core_claim_plus`.
+
 Validation later flagged the ablation reference because `reference.json` had used `1.0` as a placeholder for Static TTL's primary metric even though the paper text only states that Figure 15 shows gradual improvement and does not report an exact numeric value. The reference now keeps Static TTL as an ablation baseline but omits an invented paper-side primary metric; the reproduced Static TTL score remains in `scores.json`.
 
 ## Deviations from Paper
