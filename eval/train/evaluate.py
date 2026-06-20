@@ -23,6 +23,7 @@ EXPERIMENTS = {
 
 TRAIN_METRICS = [
     "avg_completion_time_s",
+    "avg_queue_wait_s",
     "throughput_jobs_per_s",
     "completed_fraction",
 ]

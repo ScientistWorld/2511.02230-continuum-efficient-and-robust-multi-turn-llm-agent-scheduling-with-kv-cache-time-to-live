@@ -6,20 +6,81 @@
       "weight": 0.3,
       "primary_metric": "delay_reduction_x",
       "metrics": {
-        "avg_completion_time_s": {"higher_is_better": false, "coefficient": -1.0},
-        "p90_completion_time_s": {"higher_is_better": false, "coefficient": -0.5},
-        "throughput_jobs_per_s": {"higher_is_better": true, "coefficient": 0.5},
-        "cache_hit_rate": {"higher_is_better": true, "coefficient": 0.4},
-        "peak_pinned_memory_fraction": {"higher_is_better": false, "coefficient": -0.3},
-        "expired_pin_fraction": {"higher_is_better": false, "coefficient": -0.2},
-        "completed_fraction": {"higher_is_better": true, "coefficient": 0.5},
-        "delay_reduction_x": {"higher_is_better": true, "coefficient": 1.0},
-        "p90_delay_reduction_x": {"higher_is_better": true, "coefficient": 0.5},
-        "throughput_improvement_x": {"higher_is_better": true, "coefficient": 0.5}
+        "avg_completion_time_s": {
+          "higher_is_better": false,
+          "coefficient": -1.0,
+          "description": "Mean end-to-end program completion time; lower values measure the paper's headline delay reduction goal."
+        },
+        "p90_completion_time_s": {
+          "higher_is_better": false,
+          "coefficient": -0.5,
+          "description": "Tail end-to-end completion time; lower values catch methods that improve the mean while leaving slow programs behind."
+        },
+        "avg_queue_wait_s": {
+          "higher_is_better": false,
+          "coefficient": -0.4,
+          "description": "Average per-request queue waiting time; lower values directly probe the scheduling-bubble mechanism targeted by the paper."
+        },
+        "throughput_jobs_per_s": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Completed agent programs per second; higher values measure the paper's throughput benefit without using wall-clock benchmarking."
+        },
+        "cache_hit_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.4,
+          "description": "Fraction of reusable cross-turn KV cache accesses served from retained cache; higher values indicate useful continuity preservation."
+        },
+        "peak_pinned_memory_fraction": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Peak fraction of capacity occupied by pinned KV cache; lower values penalize over-pinning shortcuts that create memory pressure."
+        },
+        "expired_pin_fraction": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Fraction of TTL decisions that expired before reuse; lower values measure TTL robustness under variable tool-call durations."
+        },
+        "deadlock_unpins": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Number of forced unpins used to recover schedulability; lower values penalize policies that rely on deadlock recovery."
+        },
+        "completed_fraction": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Fraction of programs completed by the scheduler run; higher values prevent latency gains from dropping or starving work."
+        },
+        "delay_reduction_x": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Average-completion speedup relative to the experiment baseline; higher values are the normalized headline benefit."
+        },
+        "p90_delay_reduction_x": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "P90-completion speedup relative to the experiment baseline; higher values reward tail-latency improvements."
+        },
+        "throughput_improvement_x": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Throughput ratio relative to the experiment baseline; higher values reward machine-independent throughput gains."
+        }
       },
       "results": {
-        "vllm": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "cache_hit_rate": 0.0, "completed_fraction": 1.0},
-        "continuum": {"type": "proposed", "delay_reduction_x": 2.0, "throughput_improvement_x": 2.0, "completed_fraction": 1.0}
+        "vllm": {
+          "type": "baseline",
+          "delay_reduction_x": 1.0,
+          "throughput_improvement_x": 1.0,
+          "cache_hit_rate": 0.0,
+          "completed_fraction": 1.0
+        },
+        "continuum": {
+          "type": "proposed",
+          "delay_reduction_x": 2.0,
+          "throughput_improvement_x": 2.0,
+          "completed_fraction": 1.0
+        }
       }
     },
     "bfcl_scaled_no_offload": {
@@ -28,20 +89,81 @@
       "weight": 0.25,
       "primary_metric": "delay_reduction_x",
       "metrics": {
-        "avg_completion_time_s": {"higher_is_better": false, "coefficient": -1.0},
-        "p90_completion_time_s": {"higher_is_better": false, "coefficient": -0.5},
-        "throughput_jobs_per_s": {"higher_is_better": true, "coefficient": 0.5},
-        "cache_hit_rate": {"higher_is_better": true, "coefficient": 0.4},
-        "peak_pinned_memory_fraction": {"higher_is_better": false, "coefficient": -0.3},
-        "expired_pin_fraction": {"higher_is_better": false, "coefficient": -0.2},
-        "completed_fraction": {"higher_is_better": true, "coefficient": 0.5},
-        "delay_reduction_x": {"higher_is_better": true, "coefficient": 1.0},
-        "p90_delay_reduction_x": {"higher_is_better": true, "coefficient": 0.5},
-        "throughput_improvement_x": {"higher_is_better": true, "coefficient": 0.5}
+        "avg_completion_time_s": {
+          "higher_is_better": false,
+          "coefficient": -1.0,
+          "description": "Mean end-to-end program completion time; lower values measure the paper's headline delay reduction goal."
+        },
+        "p90_completion_time_s": {
+          "higher_is_better": false,
+          "coefficient": -0.5,
+          "description": "Tail end-to-end completion time; lower values catch methods that improve the mean while leaving slow programs behind."
+        },
+        "avg_queue_wait_s": {
+          "higher_is_better": false,
+          "coefficient": -0.4,
+          "description": "Average per-request queue waiting time; lower values directly probe the scheduling-bubble mechanism targeted by the paper."
+        },
+        "throughput_jobs_per_s": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Completed agent programs per second; higher values measure the paper's throughput benefit without using wall-clock benchmarking."
+        },
+        "cache_hit_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.4,
+          "description": "Fraction of reusable cross-turn KV cache accesses served from retained cache; higher values indicate useful continuity preservation."
+        },
+        "peak_pinned_memory_fraction": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Peak fraction of capacity occupied by pinned KV cache; lower values penalize over-pinning shortcuts that create memory pressure."
+        },
+        "expired_pin_fraction": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Fraction of TTL decisions that expired before reuse; lower values measure TTL robustness under variable tool-call durations."
+        },
+        "deadlock_unpins": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Number of forced unpins used to recover schedulability; lower values penalize policies that rely on deadlock recovery."
+        },
+        "completed_fraction": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Fraction of programs completed by the scheduler run; higher values prevent latency gains from dropping or starving work."
+        },
+        "delay_reduction_x": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Average-completion speedup relative to the experiment baseline; higher values are the normalized headline benefit."
+        },
+        "p90_delay_reduction_x": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "P90-completion speedup relative to the experiment baseline; higher values reward tail-latency improvements."
+        },
+        "throughput_improvement_x": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Throughput ratio relative to the experiment baseline; higher values reward machine-independent throughput gains."
+        }
       },
       "results": {
-        "vllm": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "cache_hit_rate": 0.0, "completed_fraction": 1.0},
-        "continuum": {"type": "proposed", "delay_reduction_x": 2.0, "throughput_improvement_x": 2.0, "completed_fraction": 1.0}
+        "vllm": {
+          "type": "baseline",
+          "delay_reduction_x": 1.0,
+          "throughput_improvement_x": 1.0,
+          "cache_hit_rate": 0.0,
+          "completed_fraction": 1.0
+        },
+        "continuum": {
+          "type": "proposed",
+          "delay_reduction_x": 2.0,
+          "throughput_improvement_x": 2.0,
+          "completed_fraction": 1.0
+        }
       }
     },
     "swebench_scaled_offload": {
@@ -50,21 +172,87 @@
       "weight": 0.2,
       "primary_metric": "delay_reduction_x",
       "metrics": {
-        "avg_completion_time_s": {"higher_is_better": false, "coefficient": -1.0},
-        "p90_completion_time_s": {"higher_is_better": false, "coefficient": -0.5},
-        "throughput_jobs_per_s": {"higher_is_better": true, "coefficient": 0.5},
-        "cache_hit_rate": {"higher_is_better": true, "coefficient": 0.4},
-        "peak_pinned_memory_fraction": {"higher_is_better": false, "coefficient": -0.3},
-        "expired_pin_fraction": {"higher_is_better": false, "coefficient": -0.2},
-        "completed_fraction": {"higher_is_better": true, "coefficient": 0.5},
-        "delay_reduction_x": {"higher_is_better": true, "coefficient": 1.0},
-        "p90_delay_reduction_x": {"higher_is_better": true, "coefficient": 0.5},
-        "throughput_improvement_x": {"higher_is_better": true, "coefficient": 0.5}
+        "avg_completion_time_s": {
+          "higher_is_better": false,
+          "coefficient": -1.0,
+          "description": "Mean end-to-end program completion time; lower values measure the paper's headline delay reduction goal."
+        },
+        "p90_completion_time_s": {
+          "higher_is_better": false,
+          "coefficient": -0.5,
+          "description": "Tail end-to-end completion time; lower values catch methods that improve the mean while leaving slow programs behind."
+        },
+        "avg_queue_wait_s": {
+          "higher_is_better": false,
+          "coefficient": -0.4,
+          "description": "Average per-request queue waiting time; lower values directly probe the scheduling-bubble mechanism targeted by the paper."
+        },
+        "throughput_jobs_per_s": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Completed agent programs per second; higher values measure the paper's throughput benefit without using wall-clock benchmarking."
+        },
+        "cache_hit_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.4,
+          "description": "Fraction of reusable cross-turn KV cache accesses served from retained cache; higher values indicate useful continuity preservation."
+        },
+        "peak_pinned_memory_fraction": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Peak fraction of capacity occupied by pinned KV cache; lower values penalize over-pinning shortcuts that create memory pressure."
+        },
+        "expired_pin_fraction": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Fraction of TTL decisions that expired before reuse; lower values measure TTL robustness under variable tool-call durations."
+        },
+        "deadlock_unpins": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Number of forced unpins used to recover schedulability; lower values penalize policies that rely on deadlock recovery."
+        },
+        "completed_fraction": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Fraction of programs completed by the scheduler run; higher values prevent latency gains from dropping or starving work."
+        },
+        "delay_reduction_x": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Average-completion speedup relative to the experiment baseline; higher values are the normalized headline benefit."
+        },
+        "p90_delay_reduction_x": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "P90-completion speedup relative to the experiment baseline; higher values reward tail-latency improvements."
+        },
+        "throughput_improvement_x": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Throughput ratio relative to the experiment baseline; higher values reward machine-independent throughput gains."
+        }
       },
       "results": {
-        "vllm": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "cache_hit_rate": 0.0, "completed_fraction": 1.0},
-        "infercept": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "completed_fraction": 1.0},
-        "continuum": {"type": "proposed", "delay_reduction_x": 1.12, "throughput_improvement_x": 1.10, "completed_fraction": 1.0}
+        "vllm": {
+          "type": "baseline",
+          "delay_reduction_x": 1.0,
+          "throughput_improvement_x": 1.0,
+          "cache_hit_rate": 0.0,
+          "completed_fraction": 1.0
+        },
+        "infercept": {
+          "type": "baseline",
+          "delay_reduction_x": 1.0,
+          "throughput_improvement_x": 1.0,
+          "completed_fraction": 1.0
+        },
+        "continuum": {
+          "type": "proposed",
+          "delay_reduction_x": 1.12,
+          "throughput_improvement_x": 1.1,
+          "completed_fraction": 1.0
+        }
       }
     },
     "turn_robustness_scaled": {
@@ -73,20 +261,81 @@
       "weight": 0.15,
       "primary_metric": "delay_reduction_x",
       "metrics": {
-        "avg_completion_time_s": {"higher_is_better": false, "coefficient": -1.0},
-        "p90_completion_time_s": {"higher_is_better": false, "coefficient": -0.5},
-        "throughput_jobs_per_s": {"higher_is_better": true, "coefficient": 0.5},
-        "cache_hit_rate": {"higher_is_better": true, "coefficient": 0.4},
-        "peak_pinned_memory_fraction": {"higher_is_better": false, "coefficient": -0.3},
-        "expired_pin_fraction": {"higher_is_better": false, "coefficient": -0.2},
-        "completed_fraction": {"higher_is_better": true, "coefficient": 0.5},
-        "delay_reduction_x": {"higher_is_better": true, "coefficient": 1.0},
-        "p90_delay_reduction_x": {"higher_is_better": true, "coefficient": 0.5},
-        "throughput_improvement_x": {"higher_is_better": true, "coefficient": 0.5}
+        "avg_completion_time_s": {
+          "higher_is_better": false,
+          "coefficient": -1.0,
+          "description": "Mean end-to-end program completion time; lower values measure the paper's headline delay reduction goal."
+        },
+        "p90_completion_time_s": {
+          "higher_is_better": false,
+          "coefficient": -0.5,
+          "description": "Tail end-to-end completion time; lower values catch methods that improve the mean while leaving slow programs behind."
+        },
+        "avg_queue_wait_s": {
+          "higher_is_better": false,
+          "coefficient": -0.4,
+          "description": "Average per-request queue waiting time; lower values directly probe the scheduling-bubble mechanism targeted by the paper."
+        },
+        "throughput_jobs_per_s": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Completed agent programs per second; higher values measure the paper's throughput benefit without using wall-clock benchmarking."
+        },
+        "cache_hit_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.4,
+          "description": "Fraction of reusable cross-turn KV cache accesses served from retained cache; higher values indicate useful continuity preservation."
+        },
+        "peak_pinned_memory_fraction": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Peak fraction of capacity occupied by pinned KV cache; lower values penalize over-pinning shortcuts that create memory pressure."
+        },
+        "expired_pin_fraction": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Fraction of TTL decisions that expired before reuse; lower values measure TTL robustness under variable tool-call durations."
+        },
+        "deadlock_unpins": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Number of forced unpins used to recover schedulability; lower values penalize policies that rely on deadlock recovery."
+        },
+        "completed_fraction": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Fraction of programs completed by the scheduler run; higher values prevent latency gains from dropping or starving work."
+        },
+        "delay_reduction_x": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Average-completion speedup relative to the experiment baseline; higher values are the normalized headline benefit."
+        },
+        "p90_delay_reduction_x": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "P90-completion speedup relative to the experiment baseline; higher values reward tail-latency improvements."
+        },
+        "throughput_improvement_x": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Throughput ratio relative to the experiment baseline; higher values reward machine-independent throughput gains."
+        }
       },
       "results": {
-        "vllm": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "cache_hit_rate": 0.0, "completed_fraction": 1.0},
-        "continuum": {"type": "proposed", "delay_reduction_x": 1.12, "throughput_improvement_x": 1.10, "completed_fraction": 1.0}
+        "vllm": {
+          "type": "baseline",
+          "delay_reduction_x": 1.0,
+          "throughput_improvement_x": 1.0,
+          "cache_hit_rate": 0.0,
+          "completed_fraction": 1.0
+        },
+        "continuum": {
+          "type": "proposed",
+          "delay_reduction_x": 1.12,
+          "throughput_improvement_x": 1.1,
+          "completed_fraction": 1.0
+        }
       }
     },
     "ablation_scaled": {
@@ -95,21 +344,83 @@
       "weight": 0.1,
       "primary_metric": "delay_reduction_x",
       "metrics": {
-        "avg_completion_time_s": {"higher_is_better": false, "coefficient": -1.0},
-        "p90_completion_time_s": {"higher_is_better": false, "coefficient": -0.5},
-        "throughput_jobs_per_s": {"higher_is_better": true, "coefficient": 0.5},
-        "cache_hit_rate": {"higher_is_better": true, "coefficient": 0.4},
-        "peak_pinned_memory_fraction": {"higher_is_better": false, "coefficient": -0.3},
-        "expired_pin_fraction": {"higher_is_better": false, "coefficient": -0.2},
-        "completed_fraction": {"higher_is_better": true, "coefficient": 0.5},
-        "delay_reduction_x": {"higher_is_better": true, "coefficient": 1.0},
-        "p90_delay_reduction_x": {"higher_is_better": true, "coefficient": 0.5},
-        "throughput_improvement_x": {"higher_is_better": true, "coefficient": 0.5}
+        "avg_completion_time_s": {
+          "higher_is_better": false,
+          "coefficient": -1.0,
+          "description": "Mean end-to-end program completion time; lower values measure the paper's headline delay reduction goal."
+        },
+        "p90_completion_time_s": {
+          "higher_is_better": false,
+          "coefficient": -0.5,
+          "description": "Tail end-to-end completion time; lower values catch methods that improve the mean while leaving slow programs behind."
+        },
+        "avg_queue_wait_s": {
+          "higher_is_better": false,
+          "coefficient": -0.4,
+          "description": "Average per-request queue waiting time; lower values directly probe the scheduling-bubble mechanism targeted by the paper."
+        },
+        "throughput_jobs_per_s": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Completed agent programs per second; higher values measure the paper's throughput benefit without using wall-clock benchmarking."
+        },
+        "cache_hit_rate": {
+          "higher_is_better": true,
+          "coefficient": 0.4,
+          "description": "Fraction of reusable cross-turn KV cache accesses served from retained cache; higher values indicate useful continuity preservation."
+        },
+        "peak_pinned_memory_fraction": {
+          "higher_is_better": false,
+          "coefficient": -0.3,
+          "description": "Peak fraction of capacity occupied by pinned KV cache; lower values penalize over-pinning shortcuts that create memory pressure."
+        },
+        "expired_pin_fraction": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Fraction of TTL decisions that expired before reuse; lower values measure TTL robustness under variable tool-call durations."
+        },
+        "deadlock_unpins": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Number of forced unpins used to recover schedulability; lower values penalize policies that rely on deadlock recovery."
+        },
+        "completed_fraction": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Fraction of programs completed by the scheduler run; higher values prevent latency gains from dropping or starving work."
+        },
+        "delay_reduction_x": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Average-completion speedup relative to the experiment baseline; higher values are the normalized headline benefit."
+        },
+        "p90_delay_reduction_x": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "P90-completion speedup relative to the experiment baseline; higher values reward tail-latency improvements."
+        },
+        "throughput_improvement_x": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Throughput ratio relative to the experiment baseline; higher values reward machine-independent throughput gains."
+        }
       },
       "results": {
-        "plas": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "completed_fraction": 1.0},
-        "static_ttl": {"type": "baseline"},
-        "continuum": {"type": "proposed", "delay_reduction_x": 1.1, "throughput_improvement_x": 1.1, "completed_fraction": 1.0}
+        "plas": {
+          "type": "baseline",
+          "delay_reduction_x": 1.0,
+          "throughput_improvement_x": 1.0,
+          "completed_fraction": 1.0
+        },
+        "static_ttl": {
+          "type": "baseline"
+        },
+        "continuum": {
+          "type": "proposed",
+          "delay_reduction_x": 1.1,
+          "throughput_improvement_x": 1.1,
+          "completed_fraction": 1.0
+        }
       }
     }
   }
