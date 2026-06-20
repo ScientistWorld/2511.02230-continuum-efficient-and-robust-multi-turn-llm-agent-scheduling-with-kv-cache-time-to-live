@@ -230,3 +230,6 @@ tmp/
 protocol.md
 *.egg-info
 core.[0-9]*
+
+# Local git wrapper artifacts
+.git-shims/

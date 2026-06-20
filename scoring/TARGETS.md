@@ -1,50 +1,36 @@
 # Evaluation Targets
 
-<!-- Do not edit this unless you decide to stop -->
+## Primary: swebench_scaled_no_offload
 
-<!--
-Describe what a scientist could optimize and how to measure it.
+Tests whether a scheduler reduces end-to-end completion time on a coding-agent-style multi-turn workload without cache offload.
+- **Metric:** `delay_reduction_x` (higher is better)
 
-If a paper claims "we get X without sacrificing Y." Your targets must
-capture BOTH sides. Without constraint targets, a scientist can trivially
-"improve" by breaking the property the paper was designed to satisfy.
+## Primary: bfcl_scaled_no_offload
 
-Three kinds of targets:
+Tests whether the same effect appears on a web-search/function-calling-style multi-turn workload.
+- **Metric:** `delay_reduction_x` (higher is better)
 
-  PRIMARY    — the main thing the paper optimizes (accuracy, PSNR, etc.)
-  CONSTRAINT — what the paper must maintain (security, fairness, param count,
-               baseline comparison). Constraint metrics guard against cheating:
-               a scientist who ignores the constraint should score WORSE.
-  ABLATION   — what breaks when the key idea is removed (wrong-key test,
-               no-module test). Proves the method actually does something. 
-               This can be ignored if truly not important.
+## Constraint: completed_fraction
 
-For each target, write:
-- What the experiment tests (one sentence)
-- The primary metric and direction (higher/lower is better)
-- How to run evaluation
+All scheduler variants should finish every program under bounded cache retention and memory pressure.
+- **Metric:** `completed_fraction` (higher is better)
 
-Every target here MUST appear in both reference.json and scores.json.
-Do not list targets you cannot measure — phantom targets are worse than
-missing targets.
+## Constraint: peak_pinned_memory_fraction
 
-Example for a steganography paper:
+Cache retention should not win merely by pinning all memory indefinitely.
+- **Metric:** `peak_pinned_memory_fraction` (lower is better)
 
-## Primary: reconstruction_quality
-Cover and hidden scene PSNR on Blender Synthetic.
-- **Metric**: psnr (higher is better)
+## Robustness: swebench_scaled_offload
 
-## Constraint: key_security
-Wrong-key rendering must produce incoherent output.
-- **Metric**: wrong_key_psnr (lower is better — high means security is broken)
+Tests whether completion-time reduction remains when cache misses use CPU-style reload rather than full prefill.
+- **Metric:** `delay_reduction_x` (higher is better)
 
-## Ablation: vs_standalone_baseline
-Cover quality should match standalone model (no hidden scene embedded).
-- **Metric**: psnr_gap (lower is better — large gap means hiding costs quality)
+## Robustness: turn_robustness_scaled
 
-Delete this comment block and fill in your actual targets below.
--->
+Tests whether the scheduler remains beneficial when the same total work is split across more tool-interleaved turns.
+- **Metric:** `delay_reduction_x` (higher is better)
 
-<!-- This is high-level. IT IS ABOUT CONCEPT, NOT NUMBERS. DO NOT INCLUDE ANY ACTUAL VALUES FROM THE PAPER OR YOUR EXPERIMENTS HERE. -->
+## Ablation: ablation_scaled
 
-<!-- This should EXACTLY corresponds to the structure in your scores.json. -->
+Tests whether the full scheduler improves over simpler program-level and fixed-TTL variants.
+- **Metric:** `delay_reduction_x` (higher is better)

@@ -1,17 +1,13 @@
 # Problem Definition
 
-What problem does this paper address? Write this so that someone with no knowledge of the paper can understand what needs to be solved and how success is measured.
-
-Do NOT describe the paper's method or solution here — only the problem itself. Think about if a future scientist agent try to solve this problem from scratch without knowing what approach the paper took. If you leak the solution, you compromise the benchmark.
-
 ## Research Question
 
-<!-- What problem or challenge does this paper tackle? What gap in existing work does it address? -->
+How should an LLM serving system schedule multi-turn agent programs that alternate between model inference and external tool execution, when the next request often reuses the previous request's KV cache after a short but variable delay?
 
 ## Why It Matters
 
-<!-- Why is this problem important? What would a good solution enable? Make it short -->
+Agentic workloads issue many related inference requests per user task. If a serving engine evicts useful KV cache at every tool call, each later turn can pay extra prefill/reload and queueing delay, increasing end-to-end job completion time.
 
 ## Success Criteria
 
-<!-- What would a successful solution look like? What properties should it have? This is about the goal, not the paper's specific approach. Make it short -->
+A successful system should reduce average and tail job completion time for multi-turn tool-using agents, improve or preserve throughput, avoid hangs under memory pressure, and work when tool-call durations are long-tailed rather than perfectly predictable.

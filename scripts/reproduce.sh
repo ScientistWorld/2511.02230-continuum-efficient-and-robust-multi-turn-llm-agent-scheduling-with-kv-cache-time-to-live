@@ -1,24 +1,50 @@
 #!/bin/bash
-# Reproduce the paper's results end-to-end.
-#
-# This script runs inside the compute container and should call
-# scripts/baseline.sh and scripts/method.sh to run baselines and
-# the paper's method, each of which calls scripts/evaluate.sh.
-#
-# Assumes:
-#   - Container is built (environment/container.sif)
-#   - Data and models are downloaded (via scripts/download.sh)
-#   - Working directory is /home/user
-#
-# This is the "gold standard" reproduction — 
-# You do not need to run this, but keep this in good shape
-# so other agents can easily run a full loop of reproduction and get the paper's numbers.
+# End-to-end scaled reproduction of Continuum's core scheduling claim.
 
-set -e
+set -euo pipefail
 
 cd /home/user
 
-# TODO: implement full reproduction pipeline
-# e.g.:
-#   bash scripts/baseline.sh
-#   bash scripts/method.sh
+rm -rf outputs
+mkdir -p data/workloads outputs
+
+python data/workloads.py --dataset swebench --programs 120 --arrival-rate 0.13 --seed 7 \
+  --output data/workloads/swebench_scaled.json
+python data/workloads.py --dataset bfcl --programs 120 --arrival-rate 0.13 --seed 11 \
+  --output data/workloads/bfcl_scaled.json
+python data/workloads.py --dataset swebench --programs 120 --arrival-rate 0.25 --seed 13 \
+  --turn-multiplier 3 --output data/workloads/swebench_turn3_scaled.json
+
+mkdir -p outputs/swebench_scaled_no_offload outputs/bfcl_scaled_no_offload \
+  outputs/swebench_scaled_offload outputs/turn_robustness_scaled outputs/ablation_scaled
+
+python method/continuum_sim.py --workload data/workloads/swebench_scaled.json --policy vllm \
+  --output outputs/swebench_scaled_no_offload/vllm.json
+python method/continuum_sim.py --workload data/workloads/swebench_scaled.json --policy continuum \
+  --output outputs/swebench_scaled_no_offload/continuum.json
+
+python method/continuum_sim.py --workload data/workloads/bfcl_scaled.json --policy vllm \
+  --output outputs/bfcl_scaled_no_offload/vllm.json
+python method/continuum_sim.py --workload data/workloads/bfcl_scaled.json --policy continuum \
+  --output outputs/bfcl_scaled_no_offload/continuum.json
+
+python method/continuum_sim.py --workload data/workloads/swebench_scaled.json --policy vllm --offload --capacity 3 \
+  --output outputs/swebench_scaled_offload/vllm.json
+python method/continuum_sim.py --workload data/workloads/swebench_scaled.json --policy infercept --offload --capacity 3 \
+  --output outputs/swebench_scaled_offload/infercept.json
+python method/continuum_sim.py --workload data/workloads/swebench_scaled.json --policy continuum --offload --capacity 3 \
+  --output outputs/swebench_scaled_offload/continuum.json
+
+python method/continuum_sim.py --workload data/workloads/swebench_turn3_scaled.json --policy vllm --offload --capacity 3 \
+  --output outputs/turn_robustness_scaled/vllm.json
+python method/continuum_sim.py --workload data/workloads/swebench_turn3_scaled.json --policy continuum --offload --capacity 3 \
+  --output outputs/turn_robustness_scaled/continuum.json
+
+python method/continuum_sim.py --workload data/workloads/swebench_scaled.json --policy plas \
+  --output outputs/ablation_scaled/plas.json
+python method/continuum_sim.py --workload data/workloads/swebench_scaled.json --policy static_ttl \
+  --output outputs/ablation_scaled/static_ttl.json
+python method/continuum_sim.py --workload data/workloads/swebench_scaled.json --policy continuum \
+  --output outputs/ablation_scaled/continuum.json
+
+bash scripts/evaluate.sh outputs

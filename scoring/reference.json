@@ -1,0 +1,111 @@
+{
+  "experiments": {
+    "swebench_scaled_no_offload": {
+      "description": "Scaled SWE-Bench-style agent traces without KV offload; paper reports up to roughly 2x average response-time reduction over vanilla vLLM.",
+      "weight": 0.3,
+      "primary_metric": "delay_reduction_x",
+      "metrics": {
+        "avg_completion_time_s": {"higher_is_better": false, "coefficient": -1.0},
+        "p90_completion_time_s": {"higher_is_better": false, "coefficient": -0.5},
+        "throughput_jobs_per_s": {"higher_is_better": true, "coefficient": 0.5},
+        "cache_hit_rate": {"higher_is_better": true, "coefficient": 0.4},
+        "peak_pinned_memory_fraction": {"higher_is_better": false, "coefficient": -0.3},
+        "expired_pin_fraction": {"higher_is_better": false, "coefficient": -0.2},
+        "completed_fraction": {"higher_is_better": true, "coefficient": 0.5},
+        "delay_reduction_x": {"higher_is_better": true, "coefficient": 1.0},
+        "p90_delay_reduction_x": {"higher_is_better": true, "coefficient": 0.5},
+        "throughput_improvement_x": {"higher_is_better": true, "coefficient": 0.5}
+      },
+      "results": {
+        "vllm": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "cache_hit_rate": 0.0, "completed_fraction": 1.0},
+        "continuum": {"type": "proposed", "delay_reduction_x": 2.0, "throughput_improvement_x": 2.0, "completed_fraction": 1.0}
+      }
+    },
+    "bfcl_scaled_no_offload": {
+      "description": "Scaled BFCL-v4-style web-search traces without KV offload; paper reports consistent end-to-end gains and up to roughly 2x average response-time reduction.",
+      "weight": 0.25,
+      "primary_metric": "delay_reduction_x",
+      "metrics": {
+        "avg_completion_time_s": {"higher_is_better": false, "coefficient": -1.0},
+        "p90_completion_time_s": {"higher_is_better": false, "coefficient": -0.5},
+        "throughput_jobs_per_s": {"higher_is_better": true, "coefficient": 0.5},
+        "cache_hit_rate": {"higher_is_better": true, "coefficient": 0.4},
+        "peak_pinned_memory_fraction": {"higher_is_better": false, "coefficient": -0.3},
+        "expired_pin_fraction": {"higher_is_better": false, "coefficient": -0.2},
+        "completed_fraction": {"higher_is_better": true, "coefficient": 0.5},
+        "delay_reduction_x": {"higher_is_better": true, "coefficient": 1.0},
+        "p90_delay_reduction_x": {"higher_is_better": true, "coefficient": 0.5},
+        "throughput_improvement_x": {"higher_is_better": true, "coefficient": 0.5}
+      },
+      "results": {
+        "vllm": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "cache_hit_rate": 0.0, "completed_fraction": 1.0},
+        "continuum": {"type": "proposed", "delay_reduction_x": 2.0, "throughput_improvement_x": 2.0, "completed_fraction": 1.0}
+      }
+    },
+    "swebench_scaled_offload": {
+      "description": "SWE-Bench-style traces with CPU offload enabled; paper reports Continuum improves over offloading baselines including InferCept.",
+      "weight": 0.2,
+      "primary_metric": "delay_reduction_x",
+      "metrics": {
+        "avg_completion_time_s": {"higher_is_better": false, "coefficient": -1.0},
+        "p90_completion_time_s": {"higher_is_better": false, "coefficient": -0.5},
+        "throughput_jobs_per_s": {"higher_is_better": true, "coefficient": 0.5},
+        "cache_hit_rate": {"higher_is_better": true, "coefficient": 0.4},
+        "peak_pinned_memory_fraction": {"higher_is_better": false, "coefficient": -0.3},
+        "expired_pin_fraction": {"higher_is_better": false, "coefficient": -0.2},
+        "completed_fraction": {"higher_is_better": true, "coefficient": 0.5},
+        "delay_reduction_x": {"higher_is_better": true, "coefficient": 1.0},
+        "p90_delay_reduction_x": {"higher_is_better": true, "coefficient": 0.5},
+        "throughput_improvement_x": {"higher_is_better": true, "coefficient": 0.5}
+      },
+      "results": {
+        "vllm": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "cache_hit_rate": 0.0, "completed_fraction": 1.0},
+        "infercept": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "completed_fraction": 1.0},
+        "continuum": {"type": "proposed", "delay_reduction_x": 1.12, "throughput_improvement_x": 1.10, "completed_fraction": 1.0}
+      }
+    },
+    "turn_robustness_scaled": {
+      "description": "More-turn SWE-Bench-style traces; paper reports Continuum remains stable while baseline delay grows as turn count increases.",
+      "weight": 0.15,
+      "primary_metric": "delay_reduction_x",
+      "metrics": {
+        "avg_completion_time_s": {"higher_is_better": false, "coefficient": -1.0},
+        "p90_completion_time_s": {"higher_is_better": false, "coefficient": -0.5},
+        "throughput_jobs_per_s": {"higher_is_better": true, "coefficient": 0.5},
+        "cache_hit_rate": {"higher_is_better": true, "coefficient": 0.4},
+        "peak_pinned_memory_fraction": {"higher_is_better": false, "coefficient": -0.3},
+        "expired_pin_fraction": {"higher_is_better": false, "coefficient": -0.2},
+        "completed_fraction": {"higher_is_better": true, "coefficient": 0.5},
+        "delay_reduction_x": {"higher_is_better": true, "coefficient": 1.0},
+        "p90_delay_reduction_x": {"higher_is_better": true, "coefficient": 0.5},
+        "throughput_improvement_x": {"higher_is_better": true, "coefficient": 0.5}
+      },
+      "results": {
+        "vllm": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "cache_hit_rate": 0.0, "completed_fraction": 1.0},
+        "continuum": {"type": "proposed", "delay_reduction_x": 1.12, "throughput_improvement_x": 1.10, "completed_fraction": 1.0}
+      }
+    },
+    "ablation_scaled": {
+      "description": "Ablation corresponding to Figure 15; paper reports program-level scheduling, static TTL, and full cost-model TTL improve progressively.",
+      "weight": 0.1,
+      "primary_metric": "delay_reduction_x",
+      "metrics": {
+        "avg_completion_time_s": {"higher_is_better": false, "coefficient": -1.0},
+        "p90_completion_time_s": {"higher_is_better": false, "coefficient": -0.5},
+        "throughput_jobs_per_s": {"higher_is_better": true, "coefficient": 0.5},
+        "cache_hit_rate": {"higher_is_better": true, "coefficient": 0.4},
+        "peak_pinned_memory_fraction": {"higher_is_better": false, "coefficient": -0.3},
+        "expired_pin_fraction": {"higher_is_better": false, "coefficient": -0.2},
+        "completed_fraction": {"higher_is_better": true, "coefficient": 0.5},
+        "delay_reduction_x": {"higher_is_better": true, "coefficient": 1.0},
+        "p90_delay_reduction_x": {"higher_is_better": true, "coefficient": 0.5},
+        "throughput_improvement_x": {"higher_is_better": true, "coefficient": 0.5}
+      },
+      "results": {
+        "plas": {"type": "baseline", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "completed_fraction": 1.0},
+        "static_ttl": {"type": "proposed", "delay_reduction_x": 1.0, "throughput_improvement_x": 1.0, "completed_fraction": 1.0},
+        "continuum": {"type": "proposed", "delay_reduction_x": 1.1, "throughput_improvement_x": 1.1, "completed_fraction": 1.0}
+      }
+    }
+  }
+}
