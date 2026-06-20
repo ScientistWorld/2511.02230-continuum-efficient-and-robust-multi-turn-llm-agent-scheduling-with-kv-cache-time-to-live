@@ -26,5 +26,4 @@
 - All scored experiments completed every program and include cache-retention constraints.
 
 ## Stop Justification
-
-Stopped at `core_claim_plus`. The reusable environment is validated end-to-end; moving higher would require real vLLM/Llama hardware traces or the full upstream serving stack, which is beyond the scope of this scaled CPU reproduction.
+- Completed at milestone `core_claim_plus`.
