@@ -1,8 +1,7 @@
 # Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends.
-action: pending
+action: submit
 gpus: 0
-test: false
 milestone: secondary_claims
-notes: ""
+notes: "CPU job: hardening verification. Runs redteam/hardening/run_hardening.sh (weaker/better variants and shortcuts scored by both the train evaluator and the hidden-test evaluator, which now owns the engine; rank tables), then scripts/reproduce.sh to regenerate the reference scores from method/policies, then validate.py --post-design."
