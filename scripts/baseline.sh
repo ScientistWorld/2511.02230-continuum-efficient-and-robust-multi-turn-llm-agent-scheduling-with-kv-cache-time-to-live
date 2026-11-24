@@ -1,18 +1,11 @@
 #!/bin/bash
-# Run baseline schedulers from the paper on a generated workload.
-
+# Score only the fixed baselines (vLLM, program-level FCFS, PLAS, InferCept) on
+# the train traces.  The baselines live in eval/ (eval/train/baselines.py) so
+# every method is compared against the same reference points.
 set -euo pipefail
-
-cd /home/user
-export PYTHONPATH=/home/user:${PYTHONPATH:-}
-
-WORKLOAD="${1:-data/workloads/swebench_scaled.json}"
-OUTDIR="${2:-outputs/baselines}"
-OFFLOAD="${3:-}"
-
-args=(--workload "$WORKLOAD" --output-dir "$OUTDIR")
-if [ "$OFFLOAD" = "--offload" ]; then
-  args+=(--offload)
-fi
-
-python baseline/run_baselines.py "${args[@]}"
+cd "$(dirname "$0")/.."
+empty="$(mktemp -d)"
+export PYTHONPATH="$PWD"
+python eval/train/evaluate.py --policies-dir "$empty" --output outputs/baselines_train.json
+rmdir "$empty"
+echo "wrote outputs/baselines_train.json"

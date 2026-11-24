@@ -1,0 +1,4 @@
+{
+  "command": ["python", "method/continuum_policy.py", "--mode", "static"],
+  "description": "Paper ablation (Fig. 15): program-level FCFS + TTL from the cold-start rule only (no tool history CDF)."
+}

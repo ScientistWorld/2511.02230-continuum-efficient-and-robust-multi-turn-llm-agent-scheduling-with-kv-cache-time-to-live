@@ -1,0 +1,4 @@
+{
+  "command": ["python", "method/continuum_policy.py"],
+  "description": "Continuum (paper): tool-aware cost-model TTL, pinned-first + program-level FCFS, latest-arrival victim."
+}

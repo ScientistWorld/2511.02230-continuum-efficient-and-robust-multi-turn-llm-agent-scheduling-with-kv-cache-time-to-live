@@ -1,11 +1,9 @@
 #!/bin/bash
-# Score the visible train slice from pre-generated scheduler artifacts.
-
+# Visible train split.  Runs every method declared in method/policies/*.json and
+# the fixed baselines through the evaluator-owned serving engine on the public
+# train traces (eval/train/), and writes scoring/scores_train.json.
 set -euo pipefail
-
-cd /home/user
-
-ARTIFACTS="${1:-outputs}"
-OUTPUT="${2:-scoring/scores_train.json}"
-
-python eval/train/evaluate.py --artifacts "$ARTIFACTS" --output "$OUTPUT"
+cd "$(dirname "$0")/.."
+rm -f scoring/scores_train.json
+export PYTHONPATH="$PWD"
+python eval/train/evaluate.py "$@"
