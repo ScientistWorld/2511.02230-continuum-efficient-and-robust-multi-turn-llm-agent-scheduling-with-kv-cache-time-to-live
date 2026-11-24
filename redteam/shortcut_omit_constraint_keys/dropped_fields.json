@@ -1,0 +1,19 @@
+{
+ "swebench_scaled_no_offload": [
+  "peak_pinned_memory_fraction"
+ ],
+ "bfcl_scaled_no_offload": [
+  "peak_pinned_memory_fraction"
+ ],
+ "swebench_scaled_offload": [
+  "peak_pinned_memory_fraction",
+  "deadlock_unpins"
+ ],
+ "turn_robustness_scaled": [
+  "peak_pinned_memory_fraction",
+  "deadlock_unpins"
+ ],
+ "ablation_scaled": [
+  "peak_pinned_memory_fraction"
+ ]
+}

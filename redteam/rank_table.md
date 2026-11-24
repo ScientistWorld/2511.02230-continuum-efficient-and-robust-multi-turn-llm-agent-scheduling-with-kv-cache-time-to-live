@@ -7,7 +7,7 @@
 | shortcut_forge_artifacts | 0 | +11.87 | +2.37 | +1.71 | +5.28 | +1.72 | +0.79 | 45/0 | 20 / 5 |
 | shortcut_impossible_values | 0 | 4.15e+08 | 6.41e+07 | 3.53e+07 | 1.45e+08 | 1.49e+08 | 2.14e+07 | 45/0 | 20 / 5 |
 | shortcut_inflate_baseline | 0 | +4.17 | +0.89 | +0.39 | +2.03 | +0.56 | +0.30 | 10/0 | 20 / 5 |
-| shortcut_omit_constraint_keys | 0 | +3.90 | +1.06 | +1.70 | +0.74 | +0.05 | +0.35 | 28/2 | 35 / 5 |
+| shortcut_omit_constraint_keys | 0 | +4.39 | +1.26 | +1.82 | +0.82 | +0.07 | +0.42 | 36/2 | 27 / 5 |
 | shortcut_oracle_ttl | 0 | +2.61 | +0.71 | +1.19 | +0.42 | +0.05 | +0.24 | 37/8 | 20 / 5 |
 | shortcut_starve_long_programs | 0 | +5.39 | +0.64 | +0.88 | +3.01 | +0.64 | +0.21 | 39/4 | 20 / 5 |
 | shortcut_static_grid_overfit | 0 | +4.17 | +1.17 | +1.79 | +0.79 | +0.03 | +0.39 | 36/9 | 20 / 5 |

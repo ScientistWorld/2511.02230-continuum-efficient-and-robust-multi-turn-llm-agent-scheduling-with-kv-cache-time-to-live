@@ -4,6 +4,7 @@
   "cache_hit_rate": 0.16584833606110203,
   "capacity": 3.0,
   "completed_fraction": 1.0,
+  "expired_pin_fraction": 0.0,
   "offload": true,
   "p90_completion_time_s": 124.74104243396135,
   "p95_completion_time_s": 142.7567631424651,

@@ -127,17 +127,17 @@
       "worse": 0
     },
     "shortcut_omit_constraint_keys": {
-      "better": 28,
+      "better": 36,
       "missing_experiments": [],
       "per_exp": {
-        "ablation_scaled": 0.3528992698655428,
-        "bfcl_scaled_no_offload": 1.696839875060348,
-        "swebench_scaled_no_offload": 1.0586978095966284,
-        "swebench_scaled_offload": 0.7363249815889492,
-        "turn_robustness_scaled": 0.05359000580149118
+        "ablation_scaled": 0.41852609572073746,
+        "bfcl_scaled_no_offload": 1.8222071231458827,
+        "swebench_scaled_no_offload": 1.2555782871622123,
+        "swebench_scaled_offload": 0.8168653685565987,
+        "turn_robustness_scaled": 0.07491609157524529
       },
-      "proxy": 3.898351941912959,
-      "skipped_missing": 35,
+      "proxy": 4.388092966160676,
+      "skipped_missing": 27,
       "skipped_zero_spread": 5,
       "test_rc": "0",
       "worse": 2

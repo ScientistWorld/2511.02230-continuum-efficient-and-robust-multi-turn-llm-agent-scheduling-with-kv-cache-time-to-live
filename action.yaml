@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: true
 milestone: secondary_claims
-notes: "Red-team audit CPU job: 8 honest variants + 11 shortcuts through the hidden test, 3 workload-seed reruns, rank-proxy summaries (redteam/run_all.sh)"
+notes: "Red-team follow-up CPU job: rerun selective constraint-field omission shortcut, refresh rank/seed summaries, arrival-rate sweep of retention trade-off (redteam/run_all.sh resumes)"
