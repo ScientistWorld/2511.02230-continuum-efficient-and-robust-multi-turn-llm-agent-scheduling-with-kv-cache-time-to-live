@@ -1,0 +1,7 @@
+# regenerable traces (several MB each); recreated by the run scripts
+seed_runs/workloads/
+shortcut_easier_workload/workloads/
+.bak_*/
+__pycache__/
+*.tmp
+.done
