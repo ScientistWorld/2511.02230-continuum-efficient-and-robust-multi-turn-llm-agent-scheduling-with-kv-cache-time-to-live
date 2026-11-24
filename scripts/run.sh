@@ -1,6 +1,12 @@
 #!/bin/bash
-# TEMPORARY (red-team audit job): runs redteam/run_all.sh; restored from git afterwards.
+# Job script for the scaled Continuum reproduction and train/test scoring.
+
 set -euo pipefail
+
 cd /home/user
 export PYTHONPATH=/home/user:${PYTHONPATH:-}
-bash redteam/run_all.sh
+
+bash scripts/reproduce.sh
+python validate.py --compare
+bash scripts/evaluate_train.sh outputs scoring/scores_train.json
+bash scripts/evaluate_test.sh outputs scoring/scores_test.json
