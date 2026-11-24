@@ -1,7 +1,6 @@
 # Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends.
-action: submit
-gpus: 0
+action: done
 milestone: secondary_claims
-notes: "CPU confirmation run (~6 min) of scripts/run.sh after fixing the previous job's failures: rebuilt scoring/reference.json for the evaluator-owned engine (paper values from Figs. 8/9/10/13/15b), rank.py now ranks only methods present in every experiment, and run_hardening.sh restores the real score files after the forge shortcut. Expect rc=0: hardening suite + rank tables, reference reproduction (scores_train/scores/scores_test), validate.py --post-design."
+notes: "Hardening (iteration 11) complete. The evaluator now owns the serving engine, traces and baselines, and runs each method as a policy process. Hidden test traces are generated in memory, scoring fails closed, and the headline and throughput metrics are scored in both splits. reference.json was rebuilt from figure readings of Figs. 8/9/10/13/15b. Job 36403e22-096 reran the full pipeline with rc=0, all validator checks passed and results were bit-identical to e0d6851c-e68. Hidden test: weaker variants, the 45 s brute force (-1.23, previously +4.17), constant-TTL grids and all eleven old shortcuts score at or below the reference; paper-faithful refinements score above it (+0.05 to +0.12). Continuum vs vLLM: 2.15-4.26x mean delay, 1.67-3.40x throughput. Details in HARDENING.md."
