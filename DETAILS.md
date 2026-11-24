@@ -57,7 +57,7 @@ The primary claim is that tool-aware TTL KV-cache retention reduces multi-turn a
 
 ## Metrics
 
-The benchmark measures end-to-end program completion time, P90 completion time, job throughput, cache-hit rate, peak pinned-memory fraction, expired-pin fraction, and completed-program fraction. Lower completion time and memory pressure are better; higher throughput, cache-hit rate, and completed fraction are better.
+The benchmark measures end-to-end program completion time, P90/P95 completion time, simulated job throughput, reusable-state hit rate, peak retained-memory fraction, stale-retention expiry fraction, and completed-program fraction. Lower completion time and memory pressure are better; higher throughput, state reuse, and completed fraction are better.
 
 The reported comparison metric is `delay_reduction_x`, computed as the baseline average completion time divided by the method average completion time for the same workload. Values above 1 mean the method is faster than the baseline.
 
@@ -67,7 +67,7 @@ The main baseline is vanilla vLLM-style end-of-turn eviction. Additional baselin
 
 ## Evaluation Protocol
 
-Run `scripts/reproduce.sh` to generate deterministic SWE-Bench-like and BFCL-like multi-turn traces from the paper's published workload statistics, execute each scheduler on identical traces, and then run `scripts/evaluate.sh`. Evaluation reads JSON artifacts from `outputs/` and writes `scoring/scores.json`; it does not import or execute the method implementation.
+Run `scripts/reproduce.sh` to generate deterministic SWE-Bench-like and BFCL-like multi-turn traces from the paper's published workload statistics, execute each scheduler on identical traces, and then run `scripts/evaluate.sh`. Evaluation reads JSON artifacts from `outputs/` and writes `scoring/scores.json`; it does not import or execute any scheduler implementation.
 
 ---
 
@@ -282,4 +282,4 @@ Run `scripts/reproduce.sh` to generate deterministic SWE-Bench-like and BFCL-lik
 
 # Reproduction Milestones
 
-**Current: core_claim_plus**
+**Current: secondary_claims**
