@@ -5,7 +5,7 @@
 - **Shortcuts:** all eleven old shortcuts are closed.
 - **Improvements:** paper-faithful refinements of the reference rank above it.
 
-All numbers below come from job `e0d6851c-e68`, which ran `redteam/hardening/run_hardening.sh` and then `scripts/reproduce.sh`. Rank tables: `redteam/hardening/rank_table_test.md` (hidden test, 7 experiments × 8 traces × 160 programs) and `rank_table_train.md` (4 traces).
+All numbers below come from job `e0d6851c-e68`, reproduced bit-identically by job `36403e22-096` (exit code 0, `validate.py --post-design`: all checks passed). Both ran `redteam/hardening/run_hardening.sh` and then `scripts/reproduce.sh`. Rank tables: `redteam/hardening/rank_table_test.md` (hidden test, 7 experiments × 8 traces × 160 programs) and `rank_table_train.md` (4 traces).
 
 ## 1. What changed
 

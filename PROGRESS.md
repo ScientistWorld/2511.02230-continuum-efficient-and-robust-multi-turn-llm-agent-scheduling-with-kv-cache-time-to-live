@@ -54,6 +54,7 @@ Absolute speedups are larger than the paper's figure readings but within 2× of 
 - **Iteration 11 (hardening, `HARDENING.md`).** The simulator, traces and baselines moved into `eval/`, and the method became a policy process. The engine was rebuilt with head-of-line admission and a shared-iteration timing model, so retention now has a cost. Tool catalogues became tool-specific and tool-shift and mixed-agent experiments were added. Test traces are hidden and generated in memory, scoring fails closed, and the headline and throughput metrics are scored in both splits. `scoring/reference.json` was rebuilt from figure readings (`redteam/hardening/make_reference.py`).
   - Verification job `e0d6851c-e68`: weaker variants, the brute force, constant-TTL grids and all shortcuts score at or below the reference, while paper-faithful refinements score above it.
   - That job exited 1 only because `reference.json` had not yet been updated for the new schema and `rank.py` assumed every method ran in every experiment. Both are fixed, and `validate.py --post-design` now passes on the job's outputs.
+  - Confirmation job `36403e22-096` reran the full `scripts/run.sh` (hardening suite, reference reproduction, validator) with exit code 0. All checks passed and the scores were bit-identical to the previous job.
 
 ## Deviations from Paper
 
