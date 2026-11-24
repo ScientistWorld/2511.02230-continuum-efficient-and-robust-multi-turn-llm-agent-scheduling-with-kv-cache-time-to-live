@@ -4,4 +4,4 @@
 action: submit
 gpus: 0
 milestone: secondary_claims
-notes: "CPU job: hardening verification. Runs redteam/hardening/run_hardening.sh (weaker/better variants and shortcuts scored by both the train evaluator and the hidden-test evaluator, which now owns the engine; rank tables), then scripts/reproduce.sh to regenerate the reference scores from method/policies, then validate.py --post-design."
+notes: "CPU confirmation run (~6 min) of scripts/run.sh after fixing the previous job's failures: rebuilt scoring/reference.json for the evaluator-owned engine (paper values from Figs. 8/9/10/13/15b), rank.py now ranks only methods present in every experiment, and run_hardening.sh restores the real score files after the forge shortcut. Expect rc=0: hardening suite + rank tables, reference reproduction (scores_train/scores/scores_test), validate.py --post-design."

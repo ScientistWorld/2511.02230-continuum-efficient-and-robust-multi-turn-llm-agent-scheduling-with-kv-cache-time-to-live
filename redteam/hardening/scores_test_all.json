@@ -2830,7 +2830,7 @@
         "throughput_jobs_per_s": 0.030746942311241074
       },
       "shortcut_crash_on_offload": {
-        "failed": "policy exited (code None) before replying"
+        "failed": "policy exited (code 1) before replying"
       },
       "shortcut_forge_files": {
         "avg_completion_time_s": 6185.18781641597,
