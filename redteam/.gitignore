@@ -5,3 +5,4 @@ shortcut_easier_workload/workloads/
 __pycache__/
 *.tmp
 .done
+check_load_tradeoff/workloads/

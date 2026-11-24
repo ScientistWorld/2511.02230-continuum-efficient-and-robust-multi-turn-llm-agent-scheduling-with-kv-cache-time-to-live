@@ -51,5 +51,7 @@ cat "$RT/rank_table.md"
 "$PY" "$RT/common/seeds.py" summary | tee "$RT/seed_runs/seed_table.md"
 "$PY" "$RT/common/rank.py" > "$RT/rank_table.md"
 
+bash "$RT/check_load_tradeoff/run.sh" || echo "FAIL check_load_tradeoff"
+
 if diff -rq outputs "$RT/ref_outputs" > /dev/null; then echo "gym outputs/ restored OK"; else echo "WARNING: outputs/ differs from reference snapshot"; fi
 md5sum scoring/scores_test.json "$RT/ref_scores_test.json"
