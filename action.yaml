@@ -1,6 +1,8 @@
 # Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends.
-action: done
+action: pending
+gpus: 0
+test: false
 milestone: secondary_claims
-notes: "Red-team audit done (REDTEAM.md): hidden test only reads agent-written artifacts on visible traces; all 11 shortcuts pay (forged/impossible values, baseline inflation, field/experiment omission, crash+forged score file, starvation, bigger GPU, easier trace, oracle TTL); weaker variants score lower but 45s pin-everything brute force beats the reference by ~8x seed spread because retention is free in the simulator."
+notes: ""
