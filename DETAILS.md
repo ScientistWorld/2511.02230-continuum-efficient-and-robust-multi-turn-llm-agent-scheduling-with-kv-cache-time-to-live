@@ -277,6 +277,116 @@ Run `scripts/reproduce.sh` to generate deterministic SWE-Bench-like and BFCL-lik
 
 </details>
 
+### Iteration 8: gpt-5.5 (verifier)
+- **Milestone**: `core_claim_plus` | **Status**: done
+- **Working time**: 5m | **GPU**: 0.0h
+- **Jobs**: 3 total (2 completed, 1 failed)
+
+<details>
+<summary>Progress Log</summary>
+
+### [2026-06-20 12:58] - core_claim
+- Implemented a scaled discrete-event reproduction of Continuum's KV-cache TTL scheduler.
+- Submitted a CPU packaged job that ran `scripts/reproduce.sh` and `python validate.py --compare` successfully.
+- Demonstrated the core completion-time reduction claim on a SWE-Bench-style multi-turn workload.
+
+### [2026-06-20 13:09] - core_claim_plus
+- Covered additional BFCL-style, CPU-offload, higher-turn, and ablation settings.
+- Evaluation reports benefit metrics plus constraints including completion fraction, cache-hit rate, peak pinned memory, and expired-pin behavior.
+- The exact vLLM/Llama hardware experiments and unreleased paper traces remain out of scope for this scaled reproduction.
+
+### [2026-06-20 13:34] - core_claim_plus
+- Continued-agent audit verified the implementation is a real scaled Continuum scheduler rather than an input-output surrogate.
+- Reran standalone evaluation, validator comparison, and Python bytecode checks successfully.
+- Tightened scoring documentation for TTL-expiry and source qualification of prose-derived reference targets.
+
+### [2026-06-20 14:00] - core_claim_plus
+- Final verification confirmed the claimed milestone remains justified.
+- Fixed `scripts/evaluate.sh`'s evaluator path to score all method artifacts in each experiment rather than a fixed policy list.
+- Regenerated `scoring/scores.json` with the missing queue-wait and deadlock-unpin constraint metrics and reran validation successfully.
+
+</details>
+
+### Iteration 9: gpt-5.5 (verifier)
+- **Milestone**: `secondary_claims` | **Status**: done
+- **Working time**: 11m | **GPU**: 0.0h
+- **Jobs**: 3 total (2 completed, 1 failed)
+
+<details>
+<summary>Progress Log</summary>
+
+### [2026-06-20 12:58] - core_claim
+- Implemented a scaled discrete-event reproduction of Continuum's KV-cache TTL scheduler.
+- Submitted a CPU packaged job that ran `scripts/reproduce.sh` and `python validate.py --compare` successfully.
+- Demonstrated the core completion-time reduction claim on a SWE-Bench-style multi-turn workload.
+
+### [2026-06-20 13:09] - core_claim_plus
+- Covered additional BFCL-style, CPU-offload, higher-turn, and ablation settings.
+- Evaluation reports benefit metrics plus constraints including completion fraction, cache-hit rate, peak pinned memory, and expired-pin behavior.
+- The exact vLLM/Llama hardware experiments and unreleased paper traces remain out of scope for this scaled reproduction.
+
+### [2026-06-20 13:34] - core_claim_plus
+- Continued-agent audit verified the implementation is a real scaled Continuum scheduler rather than an input-output surrogate.
+- Reran standalone evaluation, validator comparison, and Python bytecode checks successfully.
+- Tightened scoring documentation for TTL-expiry and source qualification of prose-derived reference targets.
+
+### [2026-06-20 14:00] - core_claim_plus
+- Final verification confirmed the claimed milestone remains justified.
+- Fixed `scripts/evaluate.sh`'s evaluator path to score all method artifacts in each experiment rather than a fixed policy list.
+- Regenerated `scoring/scores.json` with the missing queue-wait and deadlock-unpin constraint metrics and reran validation successfully.
+
+### [2026-06-20 13:43] - secondary_claims
+- Added P95 completion-time and P95 delay-reduction scoring to cover the paper's tail-latency claim alongside the existing offload, turn-robustness, and ablation experiments.
+- Regenerated `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json` from method artifacts.
+- Reran `python validate.py --compare` and Python bytecode checks successfully.
+
+### [2026-06-20 13:47] - secondary_claims
+- Final verification confirmed the scaled gym remains at `secondary_claims`.
+- Tightened method-agnostic documentation for from-scratch agents and removed tracked generated root artifacts from the repository index.
+- Reran `bash -n scripts/*.sh`, `bash scripts/evaluate.sh outputs`, and `python validate.py --compare` successfully.
+
+</details>
+
+### Iteration 10: claude-opus-5-5 (redteam)
+- **Milestone**: `secondary_claims` | **Status**: done
+- **Working time**: 14m | **GPU**: 0.0h
+- **Jobs**: 5 total (4 completed, 1 failed)
+
+<details>
+<summary>Progress Log</summary>
+
+### [2026-06-20 12:58] - core_claim
+- Implemented a scaled discrete-event reproduction of Continuum's KV-cache TTL scheduler.
+- Submitted a CPU packaged job that ran `scripts/reproduce.sh` and `python validate.py --compare` successfully.
+- Demonstrated the core completion-time reduction claim on a SWE-Bench-style multi-turn workload.
+
+### [2026-06-20 13:09] - core_claim_plus
+- Covered additional BFCL-style, CPU-offload, higher-turn, and ablation settings.
+- Evaluation reports benefit metrics plus constraints including completion fraction, cache-hit rate, peak pinned memory, and expired-pin behavior.
+- The exact vLLM/Llama hardware experiments and unreleased paper traces remain out of scope for this scaled reproduction.
+
+### [2026-06-20 13:34] - core_claim_plus
+- Continued-agent audit verified the implementation is a real scaled Continuum scheduler rather than an input-output surrogate.
+- Reran standalone evaluation, validator comparison, and Python bytecode checks successfully.
+- Tightened scoring documentation for TTL-expiry and source qualification of prose-derived reference targets.
+
+### [2026-06-20 14:00] - core_claim_plus
+- Final verification confirmed the claimed milestone remains justified.
+- Fixed `scripts/evaluate.sh`'s evaluator path to score all method artifacts in each experiment rather than a fixed policy list.
+- Regenerated `scoring/scores.json` with the missing queue-wait and deadlock-unpin constraint metrics and reran validation successfully.
+
+### [2026-06-20 13:43] - secondary_claims
+- Added P95 completion-time and P95 delay-reduction scoring to cover the paper's tail-latency claim alongside the existing offload, turn-robustness, and ablation experiments.
+- Regenerated `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json` from method artifacts.
+- Reran `python validate.py --compare` and Python bytecode checks successfully.
+
+### [2026-06-20 13:47] - secondary_claims
+- Final verification confirmed the scaled gym remains at `secondary_claims`.
+- Tightened method-agnostic documentation for from-scratch agents and removed tracked generated root artifacts from the repository index.
+- Reran `bash -n scripts/*.sh`, `bash scripts/evaluate.sh outputs`, and `python validate.py --compare` successfully.
+
+</details>
+
 
 ---
 
