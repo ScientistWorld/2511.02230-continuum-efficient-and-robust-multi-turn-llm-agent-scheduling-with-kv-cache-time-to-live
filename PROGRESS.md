@@ -1,56 +1,62 @@
 # Progress
 
-## What Works
+## What Works (iteration 11, after hardening)
 
-Implemented a scaled reproduction of Continuum as a deterministic discrete-event scheduler. The implementation includes the paper's tool-call history tracking, empirical-CDF TTL optimization, cold-start fallback, TTL pin/unpin behavior, TTL-aware program-level FCFS priority, and victim unpinning under memory pressure.
+- **Paper's method as a policy.** `method/continuum_policy.py` implements Continuum (arXiv 2511.02230) as a scheduling policy:
+  - per-tool and global tool-duration history from the tool-call handler;
+  - TTL from the paper's cost model (Eq. 2): the empirical CDF over recorded durations, benefit = Prefill-Reload + T·η, and τ* = argmax P(τ)·Benefit − τ;
+  - cold start τ = ln(Benefit) while |S| ≤ K = 100;
+  - priority to programs holding a live pin, then program-level FCFS;
+  - latest-arrival victim on deadlock.
 
-`scripts/reproduce.sh` generates SWE-Bench-like and BFCL-like traces, runs baselines and Continuum variants, and writes `scoring/scores.json` through the independent evaluator.
+  `method/policies/continuum.json` is the paper method. `static_ttl.json` is the paper's Static TTL ablation.
+- **Evaluator owns the measurement.** The evaluator (`eval/train`, `eval/test`) owns a discrete-event serving engine and runs the policy over a JSON-lines protocol. The engine models KV memory, chunked-prefill iterations, an LRU evictable cache, CPU-offload reload, and head-of-line admission as in Algorithm 1. The evaluator also owns the traces (Table 1 statistics, named tools with distinct long-tailed durations) and the baselines (vLLM, program-FCFS, PLAS/Autellix, InferCept).
+- **Hidden test, fail-closed scoring.** The hidden test traces are generated in memory from a key, and a failed run gets the worst value of every metric. See `HARDENING.md`.
+- **One command runs everything.** `bash scripts/reproduce.sh` writes `scoring/scores_train.json`, `scores.json` and `scores_test.json`. It takes about 6 minutes on one CPU, including the hardening suite. `python validate.py --post-design` passes.
 
-## Results
+## Results (hidden test; train in parentheses; ratio vs vLLM unless noted)
 
-The packaged CPU test job `be56b5fe-bf9` completed successfully in the Apptainer environment and `validate.py --compare` passed. The reproduced scores are:
+| experiment | delay reduction | P95 | throughput | paper |
+|---|---|---|---|---|
+| SWE no offload | 3.04 (3.07) | 2.35 | 2.15 | 1.66 (Fig. 8) |
+| BFCL no offload | 2.15 (2.06) | 2.07 | 1.97 | 1.48 (Fig. 8) |
+| SWE + CPU offload | 2.37 (2.41); InferCept 1.92 | 1.82 | 1.67 | 1.59; InferCept ≈ 1.09 (Fig. 9) |
+| 3× turns + offload | 4.26 (4.18); InferCept 3.01 | 3.85 | 3.40 | 2.3; InferCept ≈ 1.35 (Fig. 13) |
+| ablation (vs program-FCFS) | Continuum 1.74 > Static TTL 1.67 > 1.00 > vLLM 0.82 | | | 1.31 > 1.19 > 1.00 > 0.90 (Fig. 15b) |
+| tool shift (extension) | 2.07 (2.10); Static TTL 1.93 | 1.90 | 1.79 | no paper value |
+| mixed agents (extension) | 2.07 (2.03); Static TTL 2.00 | 2.27 | 2.14 | no paper value |
 
-- SWE-style no offload: Continuum `delay_reduction_x` 1.347 over vLLM.
-- BFCL-style no offload: Continuum `delay_reduction_x` 1.212 over vLLM.
-- SWE-style CPU offload: Continuum `delay_reduction_x` 1.056 over vLLM and better than InferCept's 1.005.
-- More-turn stress: Continuum `delay_reduction_x` 1.141.
-- Ablation: Continuum improves over program-level scheduling and simple fixed TTL.
+These results reproduce the paper's claims:
+- Continuum cuts mean, P90 and P95 completion time.
+- It improves throughput (1.67–3.40×; paper 1.10–3.22×).
+- It beats InferCept with offload.
+- Its gain grows with turn count.
+- The ablation order matches.
 
-All experiments completed every program (`completed_fraction` 1.0). The scored experiments also report cache-hit behavior, peak pinned memory fraction, and expired pin fraction so future methods cannot improve latency merely by retaining all KV cache indefinitely.
+Absolute speedups are larger than the paper's figure readings but within 2× of them. The operating points are deeply overloaded, with 37–80 % of completion time spent queueing.
 
 ## Remaining
 
-The exact paper traces, vLLM fork integration, and Llama-3.1 hardware measurements are not reproduced. A higher milestone would require using the released Continuum/vLLM code and real traces or collecting equivalent vLLM traces.
+- **No real-system reproduction.** The exact paper traces, the vLLM/LMCache fork and the Llama-3.1 GPU measurements are not reproduced. This is a scaled engine.
+- **Baseline deviations.**
+  - PLAS does not show the paper's SWE-Bench degradation (≈ 1.0× vs ≈ 0.54×).
+  - InferCept is stronger than in the paper.
+  - Static TTL nearly ties Continuum on SWE + offload and 3× turns. Fig. 15a shows a similar near-tie at high SWE load.
+- **Claims not measured.** Scheduler overhead (Table 3) and SSD offload (Fig. 14).
 
-## Issues
+## History
 
-The workspace initially had only scaffold files. The paper's exact traces are not bundled here, and the public repository is a vLLM fork that is too heavy for a quick CPU-only reproduction. The implemented benchmark uses deterministic synthetic traces parameterized by the paper's published workload statistics.
-
-The first packaged CPU test job failed before running the method because the clean Apptainer environment did not put `/home/user` on Python's module search path. The reproduction scripts now export `PYTHONPATH=/home/user:${PYTHONPATH:-}`, and `data/__init__.py` makes the shared workload module an explicit package.
-
-The retry packaged CPU job succeeded and validated the reusable scripts, method outputs, independent evaluation, and scoring schema.
-
-On 2026-06-20, a continuation audit fixed two implementation fidelity issues: Continuum now uses the paper's `K = 100` cold-start threshold, and the PLAS comparison uses cumulative attained service instead of turn index. A rerun of `bash scripts/reproduce.sh`, `bash scripts/evaluate.sh outputs`, and `python validate.py --compare` passed. With the stricter settings, the current milestone remains `core_claim_plus`.
-
-Updated reproduced scores after this audit:
-
-- SWE-style no offload: Continuum `delay_reduction_x` 1.345 over vLLM.
-- BFCL-style no offload: Continuum `delay_reduction_x` 1.175 over vLLM.
-- SWE-style CPU offload: Continuum `delay_reduction_x` 1.055 over vLLM and better than InferCept's 1.005.
-- More-turn stress: Continuum `delay_reduction_x` 1.155.
-- Ablation: Continuum improves over program-level attained-service scheduling and simple fixed TTL.
-
-Validation later flagged the ablation reference because `reference.json` had used `1.0` as a placeholder for Static TTL's primary metric even though the paper text only states that Figure 15 shows gradual improvement and does not report an exact numeric value. The reference now keeps Static TTL as an ablation baseline but omits an invented paper-side primary metric; the reproduced Static TTL score remains in `scores.json`.
-
-Final packaging cleanup on 2026-06-20 aligned `MILESTONES.md`, `CHECKLIST.md`, and `action.yaml` to `core_claim_plus`, removed generated job/trajectory artifacts from git tracking, and reran `python validate.py --compare` plus Python bytecode checks successfully.
-
-Continuation audit on 2026-06-20 rechecked the method implementation, artifact-based evaluator, standalone scripts, scoring files, and deliverable docs. The audit confirmed that the workspace supports `core_claim_plus`; follow-up edits made the TTL-expiry constraint explicit in `TARGETS.md` and added source notes to `reference.json` for paper values that come from prose ranges or image-only figures.
-
-On 2026-06-20, the evaluation was extended to include the paper's P95 tail-latency claim. `method/continuum_sim.py` now writes `p95_completion_time_s`, the artifact-only evaluators compute `p95_delay_reduction_x`, and `scoring/reference.json` plus `TARGETS.md` document the new target. A full local rerun of `scripts/reproduce.sh`, train/test scoring, `python validate.py --compare`, and bytecode checks passed. Current reproduced P95 speedups for Continuum are 1.371x on SWE-style no offload, 1.167x on BFCL-style no offload, 1.150x on SWE-style offload, and 1.154x on the more-turn stress setting. This supports the `secondary_claims` milestone for the scaled benchmark.
-
-Final verification on 2026-06-20 kept the workspace at `secondary_claims`. The review tightened method-agnostic wording in the problem-facing scoring docs, removed tracked generated root artifacts from the Git index, verified that `scripts/download.sh` is self-contained with no external downloads, and reran `bash -n scripts/*.sh`, `bash scripts/evaluate.sh outputs`, and `python validate.py --compare` successfully.
+- **2026-06-20 (iterations 1–10).** The first scaled reproduction was a discrete-event simulator inside `method/`, which wrote per-policy artifacts that `eval/` copied into scores. It reached `secondary_claims`: Continuum beat vLLM 1.35× on SWE and 1.18× on BFCL, with P95 claims added later.
+- **Iteration 10 (red team, `REDTEAM.md`).** The audit found the gym did not reward better research:
+  - the test only copied method-written numbers, and traces were visible;
+  - retention was free, so a 45 s brute force won by about 8× the seed spread;
+  - every shortcut tried beat the reference.
+- **Iteration 11 (hardening, `HARDENING.md`).** The simulator, traces and baselines moved into `eval/`, and the method became a policy process. The engine was rebuilt with head-of-line admission and a shared-iteration timing model, so retention now has a cost. Tool catalogues became tool-specific and tool-shift and mixed-agent experiments were added. Test traces are hidden and generated in memory, scoring fails closed, and the headline and throughput metrics are scored in both splits. `scoring/reference.json` was rebuilt from figure readings (`redteam/hardening/make_reference.py`).
+  - Verification job `e0d6851c-e68`: weaker variants, the brute force, constant-TTL grids and all shortcuts score at or below the reference, while paper-faithful refinements score above it.
+  - That job exited 1 only because `reference.json` had not yet been updated for the new schema and `rank.py` assumed every method ran in every experiment. Both are fixed, and `validate.py --post-design` now passes on the job's outputs.
 
 ## Deviations from Paper
 
-- Paper used real GPT-5-generated SWE-Bench and BFCL traces with vLLM/LMCache serving Llama-3.1 models on A100/B200/H100 GPUs. This reproduction uses a discrete-event simulator and synthetic traces from the paper's Table 1 statistics because the exact traces and hardware are unavailable in this workspace.
-- Paper measured real wall-clock serving. This reproduction measures simulated completion time, throughput, and memory-retention behavior under a fixed timing model. The method algorithm is preserved; the serving backend is scaled down.
+- **Hardware and traces.** The paper used real GPT-5-generated SWE-Bench and BFCL traces on vLLM/LMCache with Llama-3.1 (8B and 70B) on A100, B200 and H100 GPUs. This gym uses a scaled discrete-event serving engine and synthetic traces from the paper's Table 1 statistics and Fig. 5 tool-time shapes.
+- **Simulated time.** Completion time and throughput are simulated, not wall-clock.
+- **Algorithm preserved.** The paper's algorithm is kept: tool-call handler, cost-model TTL, cold start, priority, and deadlock victim. η and T are estimated online from observed history only.

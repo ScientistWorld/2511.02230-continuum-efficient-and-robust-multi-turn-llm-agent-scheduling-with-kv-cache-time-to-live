@@ -1,28 +1,21 @@
 # Train/Test Evaluation Design Notes
 
-## What I Checked
+Current design (iteration 11). The rationale and verification are in `HARDENING.md`, and the problem-facing protocol is in `briefing/evaluation.md`.
 
-- Read `eval/train/evaluate.py`, `eval/test/evaluate.py`, `scripts/evaluate_train.sh`, `scripts/evaluate_test.sh`, and `scoring/reference.json`.
-- Checked that the evaluators read scheduler artifacts from `outputs/<experiment>/<method>.json` rather than importing or executing `method/`.
-- Checked for train/test cross-imports and score-stub files.
-- Checked `reference.json` for paper-agreement metric names and for missing `higher_is_better`, `coefficient`, or `description` fields.
-- Ran `bash -n` on both train/test evaluation shell scripts.
+## Split
 
-## Changes Made
+- **Train** (`eval/train/`, `scripts/evaluate_train.sh` → `scoring/scores_train.json`, copied to `scoring/scores.json`): 4 public traces per experiment, 160 programs each.
+- **Test** (`eval/test/`, `scripts/evaluate_test.sh` → `scoring/scores_test.json`): 8 hidden traces per experiment. They are generated in memory from a key inside `eval/test/`, from the same distribution with different seeds. `eval/test/` is an independent copy (no imports from `eval/train/`) and is chmod 000 while policies run.
+- Both splits score the same metrics. They differ in their traces, so a method cannot tune to the test traces.
 
-- Fixed a test-slice coupling issue: `eval/test/evaluate.py` no longer depends on `scoring/scores_train.json` to enumerate methods. It now discovers methods directly from held-out artifact directories, matching the train evaluator's method-agnostic artifact interface.
-- Updated `scripts/evaluate_test.sh` to match the new standalone test evaluator interface and removed the stale train-score argument.
-- Added `avg_queue_wait_s` to the visible train slice, because queueing bubbles are a direct mechanism in the paper's claim and a useful development signal.
-- Added `avg_queue_wait_s` and `deadlock_unpins` to the held-out test slice. These catch shortcuts that improve mean completion time by excessive pinning, stalled scheduling, or relying on recovery unpins.
-- Added required metric descriptions throughout `scoring/reference.json`.
-- Added `avg_queue_wait_s` and `deadlock_unpins` to every experiment's metric schema with nonzero constraint-oriented coefficients.
+## What the evaluator owns
 
-## Design Rationale
+The serving engine (memory, timing, offload), trace generation, baselines (vLLM, program-FCFS, PLAS, InferCept), metric computation and failure handling all live in `eval/`. A method is a policy process discovered from `method/policies/*.json`. `eval/` never imports `method/` and never reads method-written files.
 
-The current artifacts are run-level scheduler summaries, so a conventional per-sample data split would not isolate hidden behavior without rerunning compute. I kept a metric-split design: train exposes headline mean delay, queue wait, throughput, and completion, while test independently scores tail latency plus cache/resource robustness. This makes a narrow method that optimizes visible mean latency by over-retaining KV cache more likely to regress on hidden `peak_pinned_memory_fraction`, `expired_pin_fraction`, `deadlock_unpins`, and `p90_delay_reduction_x`.
+## Scored metrics (every experiment)
 
-## Runtime Concerns for the Next Iteration
+`delay_reduction_x`, `p90_delay_reduction_x`, `p95_delay_reduction_x`, `throughput_improvement_x` (higher is better) and `queue_wait_fraction` (lower is better). A failed run gets 0 for the ratios and 1 for `queue_wait_fraction`. Absolute times, hit rate, retained memory, forced releases and expiries are unscored `_diagnostics`.
 
-- The held-out test slice assumes every method artifact includes `p90_completion_time_s`, `avg_queue_wait_s`, `cache_hit_rate`, `peak_pinned_memory_fraction`, `expired_pin_fraction`, `deadlock_unpins`, and `completed_fraction`. Existing artifacts do, but future method runners should preserve this JSON schema.
-- `completed_fraction` is currently saturated at 1.0 in the existing artifacts. It is still useful as a guardrail, but it may not distinguish methods unless a future shortcut drops work.
-- This pass did not execute the evaluators or generate `scoring/scores_train.json` / `scoring/scores_test.json`, per the design-only instruction.
+## Runtime
+
+The full hardening suite (24 policies × 7 experiments × 12 traces) plus the reference reproduction ran in about 6 minutes on one CPU.

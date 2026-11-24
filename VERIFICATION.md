@@ -1,5 +1,7 @@
 # Verification Report
 
+> **Superseded in part (iteration 11):** this report predates the hardening. The evaluation is no longer artifact-based: the evaluator runs each method's policy in its own serving engine on hidden traces. See `HARDENING.md`.
+
 ## Initial Assessment
 
 The workspace started this final verification at `secondary_claims`. That milestone is justified for the scaled gym: the method implementation runs end-to-end, the core completion-time claim is reproduced on multiple workload settings, and additional offload, turn-robustness, ablation, and P95 tail-latency results are scored.

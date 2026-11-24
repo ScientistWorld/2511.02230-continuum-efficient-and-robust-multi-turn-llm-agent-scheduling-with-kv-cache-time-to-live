@@ -1,5 +1,7 @@
 # Red-team audit: does this gym reward better research?
 
+> **Status (iteration 11):** this audit describes the gym *before* hardening. Every item in Section 6 has been addressed. See `HARDENING.md` for the redesign (evaluator-owned engine, policy protocol, hidden in-memory test traces, fail-closed scoring) and its verification. Paths below such as `method/continuum_sim.py` no longer exist.
+
 **Short answer: no, not reliably.** Removing the paper's key idea does lower the score, consistently across seeds. But the brute force the paper argues against (retain every cache for the maximum tool time) beats the reference by about 8× the seed spread. Every shortcut tried scores above the reference.
 
 The root cause is structural. `scripts/evaluate_test.sh` runs nothing. It copies numbers out of the JSON files that the agent's own method writes to `outputs/<experiment>/<method>.json`, on the same traces the agent sees. It then divides two of them by the baseline file, which the agent also writes. The simulator itself (memory model, timing model, metric computation) lives in `method/`, which the agent controls. In from-scratch mode `method/` starts empty, and `baseline/run_baselines.py:21` calls `method/continuum_sim.py`, so the agent must even write the environment physics itself.

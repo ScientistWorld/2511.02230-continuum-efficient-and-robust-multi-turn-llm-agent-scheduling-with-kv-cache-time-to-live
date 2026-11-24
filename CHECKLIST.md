@@ -16,9 +16,9 @@
 - [x] `scoring/DIRECTION.md`
 
 ## Code
-- [x] Evaluation code in `eval/`
+- [x] Evaluation code in `eval/` (serving engine, traces, baselines, metrics; hidden test in `eval/test/`)
 - [x] Method implementation in `method/`
-- [x] Baseline implementation in `baseline/`
+- [x] Baselines (evaluator-owned in `eval/*/baselines.py`; `baseline/README.md`, `scripts/baseline.sh`)
 
 ## Scripts
 - [x] `scripts/evaluate.sh`
@@ -30,7 +30,7 @@
 - [x] `environment/container.def` + `environment/setup.sh`
 
 ## Data
-- [x] Deterministic workload generator in `data/`
+- [x] Deterministic workload generator (evaluator-owned: `eval/{train,test}/workloads.py`; see `data/README.md`)
 - [x] No pretrained models needed
 
 ## Milestones

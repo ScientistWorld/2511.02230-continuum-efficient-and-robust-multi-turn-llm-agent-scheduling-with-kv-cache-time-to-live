@@ -23,7 +23,7 @@ refj = json.loads(Path(a.reference_json).read_text())["experiments"]
 sc = json.loads(Path(a.scores).read_text())
 exps = sc["experiments"]
 diag = sc.get("_diagnostics", {})
-methods = sorted(next(iter(exps.values()))["results"])
+methods = sorted(set.intersection(*[set(v["results"]) for v in exps.values()]))  # methods scored in every experiment
 pool = [m for m in a.pool.split(",") if m] or methods
 spread = {}
 for e, spec in refj.items():

@@ -47,7 +47,7 @@ fraction, forced releases, ...) are written to `_diagnostics` but are not scored
 | `swebench_scaled_offload` | coding-agent programs | CPU | vLLM+offload (ratio), PLAS, InferCept |
 | `turn_robustness_scaled` | coding-agent programs with 3x the turns, 1/3 the tokens per turn | CPU | vLLM+offload (ratio), InferCept |
 | `ablation_scaled` | BFCL-like programs | no | program-level FCFS (ratio), vLLM |
-| `tool_shift_scaled` | coding-agent programs whose tool latencies change abruptly mid-trace | no | vLLM (ratio), program-level FCFS |
+| `tool_shift_scaled` | web-search / function-calling programs (BFCL-like) whose tool latencies change abruptly twice mid-trace | no | vLLM (ratio), program-level FCFS |
 | `mixed_agents_scaled` | coding and web agents sharing one engine | no | vLLM (ratio), program-level FCFS |
 
 Programs arrive as a Poisson wave (the operating points are overloaded, as in

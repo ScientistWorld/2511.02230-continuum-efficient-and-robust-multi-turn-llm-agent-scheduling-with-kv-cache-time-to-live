@@ -33,3 +33,8 @@
 - Final verification confirmed the scaled gym remains at `secondary_claims`.
 - Tightened method-agnostic documentation for from-scratch agents and removed tracked generated root artifacts from the repository index.
 - Reran `bash -n scripts/*.sh`, `bash scripts/evaluate.sh outputs`, and `python validate.py --compare` successfully.
+
+### [2026-11-24] - secondary_claims
+- **Hardening (iteration 11), answering `REDTEAM.md`.** The evaluator now owns a discrete-event serving engine, the traces and the baselines, and runs each method as a policy process. The hidden test generates its traces in memory, and scoring fails closed. Retention now costs something: head-of-line admission, and prefill shared by co-running requests.
+- **Verification (job `e0d6851c-e68`, `HARDENING.md`).** Weaker variants, the 45 s brute force (−1.23, old +4.17), constant-TTL grids and all eleven old shortcuts score at or below the reference. Paper-faithful refinements score above it.
+- **Paper's claims on the hidden test.** Continuum beats vLLM by 2.15–4.26× (mean) with matching P90/P95 gains and 1.67–3.40× throughput (paper: 1.10–3.22×). It also beats InferCept with offload, grows with turn count, and the paper's ablation order holds. `validate.py --post-design` passes with the rebuilt `scoring/reference.json`.

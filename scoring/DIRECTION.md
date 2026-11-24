@@ -11,6 +11,6 @@ Improvements must stay within tool-aware state-retention and request-scheduling 
 ## Out of Bounds
 
 - Replacing the problem with model-quality improvements, prompt changes, or faster tool implementations.
-- Changing the workload generator or timing model only for the proposed method.
-- Winning by increasing simulated GPU memory, reducing miss cost, or disabling memory pressure.
-- Moving evaluation logic into the method implementation.
+- Changing the evaluator's workload generator, timing model, memory capacity or baselines.
+- Using information a real serving system would not have (future tool durations, turn counts, future arrivals, the trace generator or its seeds).
+- Writing score or artifact files instead of letting the evaluator run the policy.
