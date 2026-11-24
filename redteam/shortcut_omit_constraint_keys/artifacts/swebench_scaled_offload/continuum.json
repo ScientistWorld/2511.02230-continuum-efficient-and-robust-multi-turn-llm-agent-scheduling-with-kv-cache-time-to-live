@@ -1,0 +1,16 @@
+{
+  "avg_completion_time_s": 19.03464293788547,
+  "avg_queue_wait_s": 0.15056226066312112,
+  "cache_hit_rate": 0.653232577665827,
+  "capacity": 3.0,
+  "completed_fraction": 1.0,
+  "offload": true,
+  "p90_completion_time_s": 28.998256209411124,
+  "p95_completion_time_s": 40.8439113687358,
+  "policy": "continuum",
+  "programs": 120,
+  "raw": {},
+  "throughput_jobs_per_s": 0.16193604281957485,
+  "variant": "pin_max",
+  "workload": "/home/user/data/workloads/swebench_scaled.json"
+}

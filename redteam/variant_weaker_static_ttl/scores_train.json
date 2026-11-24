@@ -1,0 +1,127 @@
+{
+  "_metric_suite": "visible mean-latency, throughput, and completion metrics",
+  "_slice": "train",
+  "experiments": {
+    "ablation_scaled": {
+      "results": {
+        "continuum": {
+          "avg_completion_time_s": 23.133506132816347,
+          "avg_queue_wait_s": 0.0007628504810666178,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.3140510169411057,
+          "throughput_improvement_x": 1.0094642860677883,
+          "throughput_jobs_per_s": 0.16067821387275882
+        },
+        "plas": {
+          "avg_completion_time_s": 30.398607259240624,
+          "avg_queue_wait_s": 0.024547072968414418,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.0,
+          "throughput_improvement_x": 1.0,
+          "throughput_jobs_per_s": 0.15917176673843106
+        },
+        "static_ttl": {
+          "avg_completion_time_s": 23.133506132816347,
+          "avg_queue_wait_s": 0.0007628504810666178,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.3140510169411057,
+          "throughput_improvement_x": 1.0094642860677883,
+          "throughput_jobs_per_s": 0.16067821387275882
+        }
+      },
+      "slice": "train"
+    },
+    "bfcl_scaled_no_offload": {
+      "results": {
+        "continuum": {
+          "avg_completion_time_s": 29.426012620541226,
+          "avg_queue_wait_s": 0.20441846011864998,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.0099049362098003,
+          "throughput_improvement_x": 1.0,
+          "throughput_jobs_per_s": 0.1316434630489725
+        },
+        "vllm": {
+          "avg_completion_time_s": 29.717475398456465,
+          "avg_queue_wait_s": 0.19399482447990474,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.0,
+          "throughput_improvement_x": 1.0,
+          "throughput_jobs_per_s": 0.1316434630489725
+        }
+      },
+      "slice": "train"
+    },
+    "swebench_scaled_no_offload": {
+      "results": {
+        "continuum": {
+          "avg_completion_time_s": 23.133506132816347,
+          "avg_queue_wait_s": 0.0007628504810666178,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.3137313492463385,
+          "throughput_improvement_x": 1.0094642860677883,
+          "throughput_jobs_per_s": 0.16067821387275882
+        },
+        "vllm": {
+          "avg_completion_time_s": 30.391212224663267,
+          "avg_queue_wait_s": 0.023870181931585507,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.0,
+          "throughput_improvement_x": 1.0,
+          "throughput_jobs_per_s": 0.15917176673843106
+        }
+      },
+      "slice": "train"
+    },
+    "swebench_scaled_offload": {
+      "results": {
+        "continuum": {
+          "avg_completion_time_s": 20.275141149059092,
+          "avg_queue_wait_s": 0.17981933262409308,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.09489034837512,
+          "throughput_improvement_x": 1.0023805492403681,
+          "throughput_jobs_per_s": 0.16159639684947621
+        },
+        "infercept": {
+          "avg_completion_time_s": 22.09708132191637,
+          "avg_queue_wait_s": 0.24980273822506396,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.0046148644088362,
+          "throughput_improvement_x": 1.0,
+          "throughput_jobs_per_s": 0.16121262226400787
+        },
+        "vllm": {
+          "avg_completion_time_s": 22.19905635604804,
+          "avg_queue_wait_s": 0.25495281915244794,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.0,
+          "throughput_improvement_x": 1.0,
+          "throughput_jobs_per_s": 0.16121262226400787
+        }
+      },
+      "slice": "train"
+    },
+    "turn_robustness_scaled": {
+      "results": {
+        "continuum": {
+          "avg_completion_time_s": 86.42830340258249,
+          "avg_queue_wait_s": 1.0766883773222242,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.1581650693702281,
+          "throughput_improvement_x": 1.0000643331554937,
+          "throughput_jobs_per_s": 0.2058971216384732
+        },
+        "vllm": {
+          "avg_completion_time_s": 100.09824200580307,
+          "avg_queue_wait_s": 1.4942332490566297,
+          "completed_fraction": 1.0,
+          "delay_reduction_x": 1.0,
+          "throughput_improvement_x": 1.0,
+          "throughput_jobs_per_s": 0.20588387647903403
+        }
+      },
+      "slice": "train"
+    }
+  }
+}

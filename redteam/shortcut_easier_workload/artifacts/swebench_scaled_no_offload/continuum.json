@@ -1,0 +1,29 @@
+{
+  "avg_completion_time_s": 20.67319390945578,
+  "avg_queue_wait_s": 0.0,
+  "cache_hit_rate": 0.43485915492957744,
+  "capacity": 8.0,
+  "completed_fraction": 1.0,
+  "deadlock_unpins": 2,
+  "expired_pin_fraction": 0.5307473982970672,
+  "offload": false,
+  "p90_completion_time_s": 31.688622485399037,
+  "p95_completion_time_s": 38.34767759433271,
+  "peak_pinned_memory_fraction": 0.48041918945312495,
+  "policy": "continuum",
+  "programs": 120,
+  "raw": {
+    "cache_hits": 494,
+    "cache_misses": 642,
+    "deadlock_unpins": 2,
+    "expired_pins": 561,
+    "peak_pinned_mem": 3.8433535156249996,
+    "pin_time_s": 279.10631268800535,
+    "queue_wait_s": 0.0,
+    "requests": 1256,
+    "ttl_decisions": 1057
+  },
+  "throughput_jobs_per_s": 0.1362397461461705,
+  "variant": "ref",
+  "workload": "/home/user/redteam/shortcut_easier_workload/workloads/swe_5.json"
+}

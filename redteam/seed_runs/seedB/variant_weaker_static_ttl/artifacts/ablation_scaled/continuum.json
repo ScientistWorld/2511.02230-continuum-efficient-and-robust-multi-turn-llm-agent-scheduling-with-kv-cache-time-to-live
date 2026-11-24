@@ -1,0 +1,29 @@
+{
+  "avg_completion_time_s": 23.484919647292926,
+  "avg_queue_wait_s": 0.00010830658145252766,
+  "cache_hit_rate": 0.4987633965375103,
+  "capacity": 8.0,
+  "completed_fraction": 1.0,
+  "deadlock_unpins": 2,
+  "expired_pin_fraction": 0.49958779884583676,
+  "offload": false,
+  "p90_completion_time_s": 34.07919138276107,
+  "p95_completion_time_s": 44.13301261653271,
+  "peak_pinned_memory_fraction": 0.44681733398437495,
+  "policy": "continuum",
+  "programs": 120,
+  "raw": {
+    "cache_hits": 605,
+    "cache_misses": 608,
+    "deadlock_unpins": 2,
+    "expired_pins": 606,
+    "peak_pinned_mem": 3.5745386718749996,
+    "pin_time_s": 303.25,
+    "queue_wait_s": 0.14437267307621937,
+    "requests": 1333,
+    "ttl_decisions": 1213
+  },
+  "throughput_jobs_per_s": 0.11927063182030934,
+  "variant": "static",
+  "workload": "/home/user/redteam/seed_runs/workloads/seedB/swe.json"
+}

@@ -1,0 +1,29 @@
+{
+  "avg_completion_time_s": 26.996617320805456,
+  "avg_queue_wait_s": 0.1416710100374783,
+  "cache_hit_rate": 0.16744186046511628,
+  "capacity": 8.0,
+  "completed_fraction": 1.0,
+  "deadlock_unpins": 52,
+  "expired_pin_fraction": 0.627039627039627,
+  "offload": false,
+  "p90_completion_time_s": 43.33876009331868,
+  "p95_completion_time_s": 49.02633161220922,
+  "peak_pinned_memory_fraction": 0.6253444335937499,
+  "policy": "continuum",
+  "programs": 120,
+  "raw": {
+    "cache_hits": 108,
+    "cache_misses": 537,
+    "deadlock_unpins": 52,
+    "expired_pins": 269,
+    "peak_pinned_mem": 5.002755468749999,
+    "pin_time_s": 373.2505080553146,
+    "queue_wait_s": 108.37832267867091,
+    "requests": 765,
+    "ttl_decisions": 429
+  },
+  "throughput_jobs_per_s": 0.12502414008990387,
+  "variant": "coldstart_only",
+  "workload": "/home/user/redteam/seed_runs/workloads/seedB/bfcl.json"
+}

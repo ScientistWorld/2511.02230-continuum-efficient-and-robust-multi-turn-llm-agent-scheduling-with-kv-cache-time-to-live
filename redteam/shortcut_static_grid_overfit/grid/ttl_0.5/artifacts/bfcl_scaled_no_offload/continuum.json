@@ -1,0 +1,29 @@
+{
+  "avg_completion_time_s": 28.14145485962672,
+  "avg_queue_wait_s": 0.1791025160391784,
+  "cache_hit_rate": 0.11949685534591195,
+  "capacity": 8.0,
+  "completed_fraction": 1.0,
+  "deadlock_unpins": 87,
+  "expired_pin_fraction": 0.7437106918238994,
+  "offload": false,
+  "p90_completion_time_s": 47.43838253873349,
+  "p95_completion_time_s": 51.517719378794254,
+  "peak_pinned_memory_fraction": 0.6537054199218748,
+  "policy": "continuum",
+  "programs": 120,
+  "raw": {
+    "cache_hits": 76,
+    "cache_misses": 560,
+    "deadlock_unpins": 87,
+    "expired_pins": 473,
+    "peak_pinned_mem": 5.2296433593749985,
+    "pin_time_s": 318.0,
+    "queue_wait_s": 135.40150212561886,
+    "requests": 756,
+    "ttl_decisions": 636
+  },
+  "throughput_jobs_per_s": 0.13208894535430904,
+  "variant": "static",
+  "workload": "/home/user/data/workloads/bfcl_scaled.json"
+}

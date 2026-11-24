@@ -1,0 +1,29 @@
+{
+  "avg_completion_time_s": 22.57828368402186,
+  "avg_queue_wait_s": 0.0,
+  "cache_hit_rate": 0.45759865659109994,
+  "capacity": 16.0,
+  "completed_fraction": 1.0,
+  "deadlock_unpins": 0,
+  "expired_pin_fraction": 0.5236013986013986,
+  "offload": false,
+  "p90_completion_time_s": 31.35416664523484,
+  "p95_completion_time_s": 39.65111330309094,
+  "peak_pinned_memory_fraction": 0.258070751953125,
+  "policy": "continuum",
+  "programs": 120,
+  "raw": {
+    "cache_hits": 545,
+    "cache_misses": 646,
+    "deadlock_unpins": 0,
+    "expired_pins": 599,
+    "peak_pinned_mem": 4.12913203125,
+    "pin_time_s": 321.66398330634024,
+    "queue_wait_s": 0.0,
+    "requests": 1311,
+    "ttl_decisions": 1144
+  },
+  "throughput_jobs_per_s": 0.16059886155709283,
+  "variant": "ref",
+  "workload": "/home/user/data/workloads/swebench_scaled.json"
+}

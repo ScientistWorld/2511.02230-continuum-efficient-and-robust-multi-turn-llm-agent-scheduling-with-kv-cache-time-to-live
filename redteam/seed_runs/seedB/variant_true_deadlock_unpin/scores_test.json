@@ -1,0 +1,151 @@
+{
+  "_metric_suite": "held-out tail-latency and cache/resource constraints",
+  "_slice": "test",
+  "experiments": {
+    "ablation_scaled": {
+      "results": {
+        "continuum": {
+          "avg_queue_wait_s": 0.00027371898444620093,
+          "cache_hit_rate": 0.4319868095630668,
+          "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
+          "expired_pin_fraction": 0.5415573053368329,
+          "p90_completion_time_s": 31.53316035970488,
+          "p90_delay_reduction_x": 1.2995287176671915,
+          "p95_completion_time_s": 40.36391673775273,
+          "p95_delay_reduction_x": 1.224953701873222,
+          "peak_pinned_memory_fraction": 0.64670986328125
+        },
+        "plas": {
+          "avg_queue_wait_s": 0.01825299246013932,
+          "cache_hit_rate": 0.0,
+          "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
+          "expired_pin_fraction": 0.0,
+          "p90_completion_time_s": 40.9782474462412,
+          "p90_delay_reduction_x": 1.0,
+          "p95_completion_time_s": 49.443929230012714,
+          "p95_delay_reduction_x": 1.0,
+          "peak_pinned_memory_fraction": 0.0
+        }
+      },
+      "slice": "test"
+    },
+    "bfcl_scaled_no_offload": {
+      "results": {
+        "continuum": {
+          "avg_queue_wait_s": 0.05203969695701419,
+          "cache_hit_rate": 0.16279069767441862,
+          "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
+          "expired_pin_fraction": 0.5387931034482759,
+          "p90_completion_time_s": 39.28837720337833,
+          "p90_delay_reduction_x": 1.325812096642042,
+          "p95_completion_time_s": 45.67962721751809,
+          "p95_delay_reduction_x": 1.2931334960265919,
+          "peak_pinned_memory_fraction": 0.693589794921875
+        },
+        "vllm": {
+          "avg_queue_wait_s": 0.1845497493753371,
+          "cache_hit_rate": 0.0,
+          "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
+          "expired_pin_fraction": 0.0,
+          "p90_completion_time_s": 52.08900575367443,
+          "p90_delay_reduction_x": 1.0,
+          "p95_completion_time_s": 59.069856040980625,
+          "p95_delay_reduction_x": 1.0,
+          "peak_pinned_memory_fraction": 0.0
+        }
+      },
+      "slice": "test"
+    },
+    "swebench_scaled_no_offload": {
+      "results": {
+        "continuum": {
+          "avg_queue_wait_s": 0.00027371898444620093,
+          "cache_hit_rate": 0.4319868095630668,
+          "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
+          "expired_pin_fraction": 0.5415573053368329,
+          "p90_completion_time_s": 31.53316035970488,
+          "p90_delay_reduction_x": 1.2995287176671915,
+          "p95_completion_time_s": 40.36391673775273,
+          "p95_delay_reduction_x": 1.224953701873222,
+          "peak_pinned_memory_fraction": 0.64670986328125
+        },
+        "vllm": {
+          "avg_queue_wait_s": 0.018519750921637435,
+          "cache_hit_rate": 0.0,
+          "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
+          "expired_pin_fraction": 0.0,
+          "p90_completion_time_s": 40.9782474462412,
+          "p90_delay_reduction_x": 1.0,
+          "p95_completion_time_s": 49.443929230012714,
+          "p95_delay_reduction_x": 1.0,
+          "peak_pinned_memory_fraction": 0.0
+        }
+      },
+      "slice": "test"
+    },
+    "swebench_scaled_offload": {
+      "results": {
+        "continuum": {
+          "avg_queue_wait_s": 0.20858594523444146,
+          "cache_hit_rate": 0.26957955482275353,
+          "completed_fraction": 1.0,
+          "deadlock_unpins": 13,
+          "expired_pin_fraction": 0.6660412757973734,
+          "p90_completion_time_s": 31.483636350596186,
+          "p90_delay_reduction_x": 1.0023291971781798,
+          "p95_completion_time_s": 38.10702145386766,
+          "p95_delay_reduction_x": 1.0061645902044856,
+          "peak_pinned_memory_fraction": 0.9936933593749999
+        },
+        "vllm": {
+          "avg_queue_wait_s": 0.19196701975776,
+          "cache_hit_rate": 0.0,
+          "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
+          "expired_pin_fraction": 0.0,
+          "p90_completion_time_s": 31.556967947542834,
+          "p90_delay_reduction_x": 1.0,
+          "p95_completion_time_s": 38.34193562504429,
+          "p95_delay_reduction_x": 1.0,
+          "peak_pinned_memory_fraction": 0.0
+        }
+      },
+      "slice": "test"
+    },
+    "turn_robustness_scaled": {
+      "results": {
+        "continuum": {
+          "avg_queue_wait_s": 2.3437178426270435,
+          "cache_hit_rate": 0.4336283185840708,
+          "completed_fraction": 1.0,
+          "deadlock_unpins": 46,
+          "expired_pin_fraction": 0.45529447665547756,
+          "p90_completion_time_s": 195.8942902801699,
+          "p90_delay_reduction_x": 0.927123492825406,
+          "p95_completion_time_s": 200.8229950915118,
+          "p95_delay_reduction_x": 1.0161095883159958,
+          "peak_pinned_memory_fraction": 0.9999884114583333
+        },
+        "vllm": {
+          "avg_queue_wait_s": 1.8618306077205837,
+          "cache_hit_rate": 0.0,
+          "completed_fraction": 1.0,
+          "deadlock_unpins": 0,
+          "expired_pin_fraction": 0.0,
+          "p90_completion_time_s": 181.6181986291051,
+          "p90_delay_reduction_x": 1.0,
+          "p95_completion_time_s": 204.0581708668213,
+          "p95_delay_reduction_x": 1.0,
+          "peak_pinned_memory_fraction": 0.0
+        }
+      },
+      "slice": "test"
+    }
+  }
+}

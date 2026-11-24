@@ -1,0 +1,15 @@
+{
+  "source": "variant_warm_history",
+  "objective": {
+    "swebench_scaled_no_offload": -0.369041625217742,
+    "bfcl_scaled_no_offload": 0.25769859452790655,
+    "swebench_scaled_offload": -0.09765627613782041,
+    "turn_robustness_scaled": 0.2726641361866026,
+    "ablation_scaled": -0.369041625217742
+  },
+  "dropped": [
+    "swebench_scaled_no_offload",
+    "swebench_scaled_offload",
+    "ablation_scaled"
+  ]
+}

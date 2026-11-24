@@ -1,0 +1,2 @@
+grid choice: {'swebench_scaled_no_offload': '45', 'bfcl_scaled_no_offload': '45', 'swebench_scaled_offload': '45', 'turn_robustness_scaled': '45', 'ablation_scaled': '45'}
+[shortcut_static_grid_overfit] hidden test rc=0

@@ -1,0 +1,2 @@
+drop: variant_warm_history ['swebench_scaled_no_offload', 'swebench_scaled_offload', 'ablation_scaled']
+[shortcut_drop_bad_experiment] hidden test rc=0

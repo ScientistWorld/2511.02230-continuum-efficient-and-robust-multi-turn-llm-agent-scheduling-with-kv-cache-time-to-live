@@ -1,0 +1,29 @@
+{
+  "avg_completion_time_s": 85.7510689080598,
+  "avg_queue_wait_s": 1.052547486574626,
+  "cache_hit_rate": 0.02266666666666667,
+  "capacity": 3.0,
+  "completed_fraction": 1.0,
+  "deadlock_unpins": 2892,
+  "expired_pin_fraction": 0.07431592039800995,
+  "offload": true,
+  "p90_completion_time_s": 127.88398177739674,
+  "p95_completion_time_s": 135.938728634546,
+  "peak_pinned_memory_fraction": 0.621394921875,
+  "policy": "continuum",
+  "programs": 120,
+  "raw": {
+    "cache_hits": 85,
+    "cache_misses": 3665,
+    "deadlock_unpins": 2892,
+    "expired_pins": 239,
+    "peak_pinned_mem": 1.8641847656250001,
+    "pin_time_s": 763.4874153146845,
+    "queue_wait_s": 4073.358773043803,
+    "requests": 3870,
+    "ttl_decisions": 3216
+  },
+  "throughput_jobs_per_s": 0.2031779316331764,
+  "variant": "ref",
+  "workload": "/home/user/redteam/seed_runs/workloads/seedD/turn3.json"
+}
